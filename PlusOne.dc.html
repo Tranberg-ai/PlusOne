@@ -296,11 +296,11 @@ a{color:#B4304A}a:hover{color:#8f2238}
 <div onClick="{{ hotTap }}" style="position:absolute;top:0;left:0;width:70px;height:70px;z-index:40"></div>
 
 <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
-  <div onClick="{{ closeMenu }}" style="position:absolute;inset:0;z-index:50;background:rgba(20,12,14,.45);display:flex;flex-direction:column;justify-content:flex-end">
+  <div onClick="{{ closeMenu }}" style="position:absolute;inset:0;z-index:50;background:rgba(20,12,14,.6);display:flex;flex-direction:column;justify-content:flex-end">
     <div onClick="{{ stop }}" style="{{ sheetStyle }}">
       <div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#6b6565;padding:0 4px 8px">Scenemenu</div>
       <sc-for list="{{ scenes }}" as="sc" hint-placeholder-count="5">
-        <button onClick="{{ sc.go }}" style="display:flex;align-items:baseline;gap:14px;text-align:left;padding:13px 4px;border-top:1px solid var(--color-divider);min-height:44px">
+        <button onClick="{{ sc.go }}" style="display:flex;align-items:baseline;gap:14px;text-align:left;padding:13px 4px;border-top:1px solid #e2dcdc;min-height:44px;color:#201f1d;background:#ffffff">
           <span style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#B4304A;width:18px;font-variant-numeric:lining-nums tabular-nums">{{ sc.n }}</span>
           <span style="font-size:15px">{{ sc.label }}</span>
         </button>
@@ -500,7 +500,7 @@ class Component extends DCLogic {
       recFootStyle: { padding: `0 22px ${bot}`, minHeight: 150, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', flex: 'none', paddingTop: 8, boxSizing: 'border-box' },
       rateFootStyle: { padding: `14px 22px ${bot}`, flex: 'none' },
       lockFootStyle: { width: '100%', boxSizing: 'border-box', display: 'flex', justifyContent: 'space-between', padding: `0 46px ${wide ? '40px' : 'calc(max(env(safe-area-inset-bottom, 0px), 14px) + 22px)'}` },
-      sheetStyle: { background: 'var(--color-bg)', borderRadius: '14px 14px 0 0', padding: `20px 20px ${bot}`, display: 'flex', flexDirection: 'column' },
+      sheetStyle: { background: '#ffffff', color: '#201f1d', boxShadow: '0 -10px 40px rgba(0,0,0,.25)', position: 'relative', zIndex: 2, borderRadius: '14px 14px 0 0', padding: `20px 20px ${bot}`, display: 'flex', flexDirection: 'column' },
       statusStyle: { position: 'absolute', top: 0, left: 0, right: 0, height: wide ? 54 : 'env(safe-area-inset-top, 0px)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: wide ? '6px 30px 0 46px' : '4px 26px 0 34px', boxSizing: 'border-box', color: dark ? '#fff' : '#111', fontFamily: "-apple-system,'SF Pro Text',system-ui,sans-serif", zIndex: 30, pointerEvents: 'none' },
       showStatus: wide && s.screen !== 'lock',
       clock: String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'),
