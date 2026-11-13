@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PlusOne">
+<meta name="theme-color" content="#E8566A">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="_ds/classical-2fbb314e-5776-4dbe-8943-b6ea81f8ed1e/styles.css">
+<script src="_ds/classical-2fbb314e-5776-4dbe-8943-b6ea81f8ed1e/_ds_bundle.js"></script>
+<style>
+html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none;background:#ece6e4}
+body{-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;touch-action:manipulation;font-family:"Lora",Georgia,serif}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:focus-visible{outline:2px solid #E8566A;outline-offset:2px}
+a{color:#B4304A}a:hover{color:#8f2238}
+@keyframes po-beat{0%,100%{transform:scale(1)}14%{transform:scale(1.09)}28%{transform:scale(1)}42%{transform:scale(1.06)}70%{transform:scale(1)}}
+@keyframes po-pulse{0%,100%{opacity:1}50%{opacity:.25}}
+@keyframes po-spin{to{transform:rotate(360deg)}}
+</style>
+</helmet>
+<div onPointerDown="{{ unlock }}" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;gap:56px;background:#ece6e4">
+<div style="{{ frameStyle }}">
+
+<sc-if value="{{ isSplash }}" hint-placeholder-val="{{ true }}">
+<div style="position:absolute;inset:0;background:#E8566A;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px">
+  <div style="position:relative;width:132px;height:132px;animation:po-beat 1.6s ease-in-out infinite">
+    <svg viewBox="0 0 24 24" width="132" height="132" style="position:absolute;inset:0"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" fill="#fff"></path></svg>
+    <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding-bottom:14px;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:64px;color:#E8566A;line-height:1">P</span>
+  </div>
+  <div style="font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:400;color:#fff;letter-spacing:.01em">PlusOne</div>
+  <div style="position:absolute;left:0;right:0;bottom:56px;text-align:center;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#fff">Diskret · Tryg · Professionel</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isApp }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;background:var(--color-bg)">
+  <div style="{{ topPadStyle }}"></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 22px 12px;border-bottom:1px solid var(--color-divider)">
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="position:relative;width:30px;height:30px">
+        <svg viewBox="0 0 24 24" width="30" height="30" style="position:absolute;inset:0"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" fill="#E8566A"></path></svg>
+        <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding-bottom:4px;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:15px;color:#fff">P</span>
+      </div>
+      <span style="font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:600;color:var(--color-text)">PlusOne</span>
+    </div>
+    <button style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid var(--color-divider);border-radius:50%;position:relative">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#201f1d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"></path><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path></svg>
+      <span style="position:absolute;top:8px;right:9px;width:7px;height:7px;border-radius:50%;background:#E8566A"></span>
+    </button>
+  </div>
+
+  <div style="flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch">
+  <sc-if value="{{ tabHome }}" hint-placeholder-val="{{ true }}">
+    <div style="padding:26px 22px 30px;display:flex;flex-direction:column;gap:26px">
+      <div>
+        <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#6b6565">Lørdag aften</div>
+        <h1 style="margin:6px 0 0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:38px;line-height:1.05;color:var(--color-text)">God aften, <em>Tess</em></h1>
+      </div>
+      <div style="border:1px solid #E8566A;border-radius:6px;padding:20px 20px 18px;display:flex;flex-direction:column;gap:14px;background:#fff">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#B4304A;font-weight:600">
+            <span style="width:8px;height:8px;border-radius:50%;background:#E8566A;animation:po-pulse 1.4s ease-in-out infinite"></span>Aktiv session
+          </div>
+          <span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#6b6565">Booking 14:00–02:00</span>
+        </div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:62px;line-height:1;font-weight:400;font-variant-numeric:lining-nums tabular-nums;color:var(--color-text);letter-spacing:.01em">{{ sessionTime }}</div>
+        <div style="height:1px;background:var(--color-divider)"></div>
+        <div style="display:grid;grid-template-columns:auto 1fr;column-gap:18px;row-gap:8px;font-size:14px">
+          <span style="color:#6b6565">Klient</span><span style="color:var(--color-text)">Storm</span>
+          <span style="color:#6b6565">Sted</span><span style="color:var(--color-text)">København K</span>
+        </div>
+        <button onClick="{{ goRecord }}" style="margin-top:4px;height:50px;display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid #E8566A;border-radius:4px;color:#B4304A;font-size:13px;letter-spacing:.16em;text-transform:uppercase" style-active="background:#FBE6E7">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4304A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
+          Start optagelse
+        </button>
+      </div>
+      <div style="display:flex;flex-direction:column">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;padding-bottom:8px;border-bottom:1px solid var(--color-divider)">Kommende aftaler</div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--color-divider)"><span style="font-size:15px">Søndag · Middag</span><span style="font-size:13px;color:#6b6565;font-variant-numeric:lining-nums tabular-nums">19:00–23:00</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--color-divider)"><span style="font-size:15px">Onsdag · Gallaaften</span><span style="font-size:13px;color:#6b6565;font-variant-numeric:lining-nums tabular-nums">18:30–01:00</span></div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ tabAppts }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:26px 22px;display:flex;flex-direction:column">
+      <h1 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:38px">Mine aftaler</h1>
+      <div style="display:flex;gap:16px;padding:16px 0;border-top:1px solid var(--color-divider)"><div style="width:52px;font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1;color:#B4304A;font-variant-numeric:lining-nums tabular-nums">14<div style="font-family:'Lora',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#6b6565;margin-top:4px">nov</div></div><div style="flex:1"><div style="font-size:15px">Storm · Aktiv nu</div><div style="font-size:13px;color:#6b6565;margin-top:3px">14:00–02:00 · København K</div></div></div>
+      <div style="display:flex;gap:16px;padding:16px 0;border-top:1px solid var(--color-divider)"><div style="width:52px;font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1;color:var(--color-text);font-variant-numeric:lining-nums tabular-nums">15<div style="font-family:'Lora',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#6b6565;margin-top:4px">nov</div></div><div style="flex:1"><div style="font-size:15px">Middag</div><div style="font-size:13px;color:#6b6565;margin-top:3px">19:00–23:00 · Frederiksberg</div></div></div>
+      <div style="display:flex;gap:16px;padding:16px 0;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)"><div style="width:52px;font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1;color:var(--color-text);font-variant-numeric:lining-nums tabular-nums">18<div style="font-family:'Lora',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#6b6565;margin-top:4px">nov</div></div><div style="flex:1"><div style="font-size:15px">Gallaaften</div><div style="font-size:13px;color:#6b6565;margin-top:3px">18:30–01:00 · Indre By</div></div></div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ tabMsgs }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:26px 22px;display:flex;flex-direction:column">
+      <h1 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:38px">Beskeder</h1>
+      <div style="padding:16px 0;border-top:1px solid var(--color-divider)"><div style="display:flex;justify-content:space-between"><span style="font-size:15px;font-weight:600">PlusOne</span><span style="font-size:12px;color:#6b6565">20:16</span></div><div style="font-size:14px;color:#4a4545;margin-top:4px">Din session med Storm er startet. Husk samtykke før optagelse.</div></div>
+      <div style="padding:16px 0;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)"><div style="display:flex;justify-content:space-between"><span style="font-size:15px">Storm</span><span style="font-size:12px;color:#6b6565">13:42</span></div><div style="font-size:14px;color:#4a4545;margin-top:4px">Vi ses kl. 14.</div></div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ tabProfile }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:22px 22px 30px;display:flex;flex-direction:column;gap:18px">
+      <div style="position:relative;width:100%;aspect-ratio:4/5;max-height:52vh;border:6px solid var(--color-surface);outline:1px solid var(--color-divider);box-sizing:border-box;background:#f3dcdd;display:flex;align-items:center;justify-content:center;overflow:hidden">
+        <span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#B4304A;text-align:center;padding:20px">Profilbillede af Tess</span>
+        <sc-if value="{{ hasPhoto }}" hint-placeholder-val="{{ false }}"><div role="img" aria-label="Tess" style="{{ photoStyle }}"></div></sc-if>
+      </div>
+      <div>
+        <h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:40px;line-height:1">Tess, 27</h1>
+        <div style="margin-top:8px;font-size:14px;color:#6b6565">København · Verificeret profil</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ tabSafety }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:26px 22px;display:flex;flex-direction:column;gap:20px">
+      <h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:38px">Sikkerhed</h1>
+      <div style="display:flex;flex-direction:column">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-top:1px solid var(--color-divider)"><span style="font-size:15px">Del live-lokation</span><span style="width:46px;height:28px;border-radius:14px;border:1px solid #E8566A;position:relative;background:#FBE6E7"><span style="position:absolute;right:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#E8566A"></span></span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)"><span style="font-size:15px">Nødkontakt</span><span style="font-size:14px;color:#6b6565">Maja</span></div>
+      </div>
+      <button style="height:56px;border:1px solid #E8566A;border-radius:4px;color:#B4304A;font-size:13px;letter-spacing:.2em;text-transform:uppercase" style-active="background:#FBE6E7">Hold for nødopkald</button>
+    </div>
+  </sc-if>
+  </div>
+
+  <div style="{{ tabBarStyle }}">
+    <button onClick="{{ tabHomeGo }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:9px;font-size:10px;min-height:44px;color:{{ c.home }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Hjem</button>
+    <button onClick="{{ tabApptsGo }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:9px;font-size:10px;min-height:44px;color:{{ c.appts }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>Mine aftaler</button>
+    <button onClick="{{ tabMsgsGo }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:9px;font-size:10px;min-height:44px;color:{{ c.msgs }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg>Beskeder</button>
+    <button onClick="{{ tabProfileGo }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:9px;font-size:10px;min-height:44px;color:{{ c.profile }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 0 0-16 0"></path></svg>Profil</button>
+    <button onClick="{{ tabSafetyGo }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:9px;font-size:10px;min-height:44px;color:{{ c.safety }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg>Sikkerhed</button>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isRecord }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;background:var(--color-bg)">
+  <div style="{{ topPadStyle }}"></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px 12px;border-bottom:1px solid var(--color-divider)">
+    <button onClick="{{ goHome }}" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#201f1d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
+    <div style="text-align:center">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;line-height:1.1">Session · Storm</div>
+      <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#6b6565;margin-top:2px">Personlige oplysninger</div>
+    </div>
+    <div style="width:44px"></div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:20px;padding:0 0 10px">
+    <div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px">
+      <div style="display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:{{ recKickerColor }};font-weight:600;height:16px">
+        <span style="{{ recDotStyle }}"></span>{{ recKicker }}
+      </div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:68px;line-height:1;font-weight:400;font-variant-numeric:lining-nums tabular-nums;color:var(--color-text)">{{ recTime }}</div>
+    </div>
+    <div style="position:relative;height:190px;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider);background:#fff">
+      <canvas ref="{{ waveRef }}" style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas>
+    </div>
+  </div>
+  <div style="{{ recFootStyle }}">
+    <sc-if value="{{ showRecBtn }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+        <button onClick="{{ toggleRec }}" aria-label="{{ recBtnLabel }}" style="width:84px;height:84px;border-radius:50%;border:3px solid #cfc8c8;display:flex;align-items:center;justify-content:center;background:#fff">
+          <span style="{{ recInnerStyle }}"></span>
+        </button>
+        <div style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--color-text)">{{ recBtnLabel }}</div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ showSend }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:12px;width:100%">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)">
+          <div><div style="font-size:15px">Optagelse · Storm</div><div style="font-size:12px;color:#6b6565;margin-top:2px;font-variant-numeric:lining-nums tabular-nums">I dag 20:26 · {{ recDur }}</div></div>
+          <button onClick="{{ deleteRec }}" aria-label="Slet" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6b6565" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg></button>
+        </div>
+        <button onClick="{{ sendRec }}" style="height:56px;display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid #E8566A;border-radius:4px;color:#B4304A;font-size:14px;letter-spacing:.2em;text-transform:uppercase;background:#fff" style-active="background:#FBE6E7">
+          <sc-if value="{{ sending }}" hint-placeholder-val="{{ false }}"><span style="width:16px;height:16px;border:2px solid #F4B4BA;border-top-color:#E8566A;border-radius:50%;animation:po-spin .7s linear infinite"></span></sc-if>
+          <sc-if value="{{ notSending }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4304A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path><path d="m21.854 2.147-10.94 10.939"></path></svg></sc-if>
+          {{ sendLabel }}
+        </button>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isSent }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:8px 0 4px">
+        <div style="width:56px;height:56px;border-radius:50%;border:1px solid #E8566A;display:flex;align-items:center;justify-content:center"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#E8566A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:26px">Sendt til PlusOne</div>
+        <div style="font-size:13px;color:#6b6565">Optagelsen er krypteret og gemt sikkert.</div>
+      </div>
+    </sc-if>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isLock }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ lockTap }}" style="position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 0%,#4a2a30 0%,#1f1517 55%,#120d0e 100%);color:#fff;font-family:-apple-system,'SF Pro Display',system-ui,sans-serif;display:flex;flex-direction:column;align-items:center">
+  <div style="{{ topPadStyle }}"></div>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:14px;opacity:.9"><rect width="18" height="11" x="3" y="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+  <div style="margin-top:14px;font-size:20px;font-weight:600;opacity:.92">lørdag 14. november</div>
+  <div style="font-size:100px;font-weight:600;line-height:1;letter-spacing:-.02em;margin-top:2px;font-variant-numeric:lining-nums tabular-nums">{{ lockTime }}</div>
+  <div style="flex:1"></div>
+  <div style="{{ notifStyle }}">
+    <div onClick="{{ openNotif }}" style="display:flex;gap:11px;align-items:flex-start;padding:13px 14px;border-radius:22px;background:rgba(255,255,255,.2);-webkit-backdrop-filter:blur(30px) saturate(1.6);backdrop-filter:blur(30px) saturate(1.6);cursor:pointer">
+      <img src="apple-touch-icon.png" alt="" style="width:38px;height:38px;border-radius:9px;flex:none">
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="font-size:15px;font-weight:600">PlusOne</span><span style="font-size:13px;opacity:.7">nu</span></div>
+        <div style="font-size:15px;line-height:1.3;margin-top:1px">Afsluttet session med PlusOne Kl {{ lockTime }}</div>
+      </div>
+    </div>
+  </div>
+  <div style="{{ lockFootStyle }}">
+    <div style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.16);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6c0 2-2 2-2 4v10a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V10c0-2-2-2-2-4V2h12z"></path><line x1="6" x2="18" y1="6" y2="6"></line></svg></div>
+    <div style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.16);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg></div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isRate }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;background:var(--color-bg)">
+  <div style="{{ topPadStyle }}"></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 16px 8px">
+    <button onClick="{{ goLock }}" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#201f1d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600">PlusOne</span>
+    <div style="width:44px"></div>
+  </div>
+  <div style="flex:1;overflow-y:auto;padding:4px 22px 0;display:flex;flex-direction:column;gap:16px">
+    <div style="position:relative;width:100%;flex:none;height:42vh;min-height:200px;max-height:380px;border:6px solid var(--color-surface);outline:1px solid var(--color-divider);box-sizing:border-box;background:#f3dcdd;display:flex;align-items:center;justify-content:center;overflow:hidden">
+      <span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#B4304A;text-align:center;padding:20px">Profilbillede af Tess</span>
+      <sc-if value="{{ hasPhoto }}" hint-placeholder-val="{{ false }}"><div role="img" aria-label="Tess" style="{{ photoStyle }}"></div></sc-if>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px">
+      <div>
+        <h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:40px;line-height:1">Tess, 27</h1>
+        <div style="margin-top:8px;display:flex;align-items:center;gap:5px;font-size:14px;color:#6b6565"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6b6565" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>København</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px">
+        <div style="display:flex;align-items:center;gap:6px">
+          <svg width="30" height="30" viewBox="0 0 24 24"><defs><linearGradient id="po-part" x1="0" x2="1" y1="0" y2="0"><stop offset="0.86" stop-color="#E8566A"></stop><stop offset="0.86" stop-color="#E8566A" stop-opacity="0"></stop></linearGradient></defs><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" fill="url(#po-part)" stroke="#E8566A" stroke-width="1.3" stroke-linejoin="round"></path></svg>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:36px;line-height:1;font-variant-numeric:lining-nums tabular-nums">5,7</span>
+        </div>
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#6b6565">ud af 6 · 48 kunder</div>
+      </div>
+    </div>
+    <div style="height:1px;background:var(--color-divider)"></div>
+    <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+        <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:24px">Bedøm din oplevelse</div>
+        <div style="display:flex;gap:4px;justify-content:center">
+          <sc-for list="{{ stars }}" as="s" hint-placeholder-count="6">
+            <button onClick="{{ s.tap }}" aria-label="{{ s.label }}" style="{{ s.style }}">
+              <svg width="40" height="40" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" stroke="#E8566A" stroke-width="1.2" stroke-linejoin="round" style="{{ s.pathStyle }}"></path></svg>
+            </button>
+          </sc-for>
+        </div>
+        <div style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#B4304A;height:16px">{{ rateLabel }}</div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 0">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:28px">Tak for din bedømmelse</div>
+        <div style="font-size:13px;color:#6b6565">Du gav Tess {{ rating }} ud af 6 stjerner.</div>
+      </div>
+    </sc-if>
+  </div>
+  <div style="{{ rateFootStyle }}">
+    <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+      <button onClick="{{ submit }}" style="{{ submitStyle }}">Indsend</button>
+    </sc-if>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ showStatus }}" hint-placeholder-val="{{ false }}">
+  <div style="{{ statusStyle }}">
+    <span style="font-weight:600;font-size:16px;font-variant-numeric:lining-nums tabular-nums">{{ clock }}</span>
+    <span style="display:flex;align-items:center;gap:6px">
+      <svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"></rect><rect x="5" y="5.5" width="3" height="6.5" rx="1"></rect><rect x="10" y="3" width="3" height="9" rx="1"></rect><rect x="15" y="0" width="3" height="12" rx="1"></rect></svg>
+      <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.3c2.2 0 4.2.9 5.7 2.3l1.1-1.1A9.6 9.6 0 0 0 8 .7 9.6 9.6 0 0 0 1.2 3.5l1.1 1.1A8 8 0 0 1 8 2.3Zm0 3.2c1.3 0 2.5.5 3.4 1.3l1.1-1.1A6.4 6.4 0 0 0 8 3.9a6.4 6.4 0 0 0-4.5 1.8l1.1 1.1c.9-.8 2.1-1.3 3.4-1.3Zm0 3.2c-.5 0-1 .2-1.3.5L8 10.5l1.3-1.3c-.3-.3-.8-.5-1.3-.5Z"></path></svg>
+      <span style="width:25px;height:12px;border:1px solid currentColor;border-radius:3.5px;padding:1.5px;box-sizing:border-box;opacity:.95;display:flex"><span style="width:72%;background:currentColor;border-radius:1.5px"></span></span>
+    </span>
+  </div>
+</sc-if>
+
+<div onClick="{{ hotTap }}" style="position:absolute;top:0;left:0;width:70px;height:70px;z-index:40"></div>
+
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeMenu }}" style="position:absolute;inset:0;z-index:50;background:rgba(20,12,14,.45);display:flex;flex-direction:column;justify-content:flex-end">
+    <div onClick="{{ stop }}" style="{{ sheetStyle }}">
+      <div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#6b6565;padding:0 4px 8px">Scenemenu</div>
+      <sc-for list="{{ scenes }}" as="sc" hint-placeholder-count="5">
+        <button onClick="{{ sc.go }}" style="display:flex;align-items:baseline;gap:14px;text-align:left;padding:13px 4px;border-top:1px solid var(--color-divider);min-height:44px">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#B4304A;width:18px;font-variant-numeric:lining-nums tabular-nums">{{ sc.n }}</span>
+          <span style="font-size:15px">{{ sc.label }}</span>
+        </button>
+      </sc-for>
+      <label style="display:flex;align-items:baseline;gap:14px;padding:13px 4px;border-top:1px solid var(--color-divider);cursor:pointer">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#B4304A;width:18px">+</span>
+        <span style="font-size:15px">Vælg profilbillede af Tess</span>
+        <input type="file" accept="image/*" onChange="{{ onPhoto }}" style="display:none">
+      </label>
+      <button onClick="{{ testMic }}" style="display:flex;align-items:baseline;gap:14px;text-align:left;padding:13px 4px;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider);min-height:44px">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#B4304A;width:18px">◦</span>
+        <span style="font-size:15px">{{ micLabel }}</span>
+      </button>
+    </div>
+  </div>
+</sc-if>
+
+</div>
+<sc-if value="{{ wide }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:260px;display:flex;flex-direction:column;gap:12px;color:var(--color-text)">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:34px;line-height:1.05">PlusOne</div>
+    <div style="height:1px;background:var(--color-divider)"></div>
+    <p style="margin:0;font-size:14px;line-height:1.6;color:#4a4545">Åbn siden i Safari på iPhone, tryk Del → <em>Føj til hjemmeskærm</em>.</p>
+    <p style="margin:0;font-size:14px;line-height:1.6;color:#4a4545">Tryk tre gange i øverste venstre hjørne af appen for at åbne scenemenuen.</p>
+  </div>
+</sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startScreen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;record&quot;,&quot;lock&quot;,&quot;rate&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;splashSeconds&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0.5,&quot;max&quot;:6,&quot;step&quot;:0.5,&quot;unit&quot;:&quot;s&quot;,&quot;default&quot;:2.4,&quot;tsType&quot;:&quot;number&quot;},&quot;notifDelay&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:20,&quot;step&quot;:1,&quot;unit&quot;:&quot;s&quot;,&quot;default&quot;:4,&quot;tsType&quot;:&quot;number&quot;},&quot;sound&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;lockTime&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;01:47&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { screen: 'splash', tab: 'home', rec: 'idle', recMs: 0, now: Date.now(), starsIn: false, rating: 0, submitted: false, notif: false, menu: false, photo: null, photoErr: false, mic: false };
+  sessionStart = Date.now() - 597000;
+  hist = [];
+  timers = [];
+  lastTap = 0; taps = 0; lvl = 0;
+  waveRef = (el) => { this.cv = el; if (el) this.draw(); };
+
+  componentDidMount() {
+    let p = null;
+    try { p = localStorage.getItem('plusone-photo'); if (p) this.setState({ photo: p }); } catch (e) {}
+    this.probe(p || 'tess.jpg');
+    this.tick = setInterval(() => this.setState({ now: Date.now() }), 500);
+    this.onResize = () => this.forceUpdate();
+    window.addEventListener('resize', this.onResize);
+    this.go('splash');
+    this.loop();
+  }
+  componentWillUnmount() {
+    clearInterval(this.tick); this.clearT(); cancelAnimationFrame(this.raf);
+    window.removeEventListener('resize', this.onResize);
+  }
+  probe(src) { const i = new Image(); i.onload = () => this.setState({ photoOk: true }); i.onerror = () => this.setState({ photoOk: false }); i.src = src; }
+  clearT() { this.timers.forEach(clearTimeout); this.timers = []; }
+  later(fn, ms) { this.timers.push(setTimeout(fn, ms)); }
+
+  go(screen) {
+    this.clearT();
+    const tabs = ['home', 'appts', 'msgs', 'profile', 'safety'];
+    if (tabs.includes(screen)) { this.setState({ screen: 'app', tab: screen, menu: false }); return; }
+    this.setState({ screen, menu: false });
+    if (screen === 'splash') {
+      this.later(() => this.go(this.props.startScreen || 'home'), (this.props.splashSeconds ?? 2.4) * 1000);
+    } else if (screen === 'record') {
+      this.hist = []; this.setState({ rec: 'idle', recMs: 0 });
+    } else if (screen === 'lock') {
+      this.setState({ notif: false });
+      this.later(() => { this.setState({ notif: true }); if (this.props.sound !== false) this.ding(); }, (this.props.notifDelay ?? 4) * 1000);
+    } else if (screen === 'rate') {
+      this.setState({ starsIn: false, rating: 0, submitted: false });
+      this.later(() => this.setState({ starsIn: true }), 900);
+    }
+  }
+
+  ensureAC() {
+    try {
+      if (!this.ac) { const AC = window.AudioContext || window.webkitAudioContext; if (AC) this.ac = new AC(); }
+      if (this.ac && this.ac.state === 'suspended') this.ac.resume();
+    } catch (e) {}
+  }
+  ding() {
+    const ac = this.ac; if (!ac) return;
+    const t = ac.currentTime;
+    [[1318.5, 0], [1760, 0.11]].forEach(([f, d]) => {
+      const o = ac.createOscillator(), g = ac.createGain();
+      o.type = 'sine'; o.frequency.value = f;
+      g.gain.setValueAtTime(0, t + d); g.gain.linearRampToValueAtTime(0.35, t + d + 0.01); g.gain.exponentialRampToValueAtTime(0.001, t + d + 0.6);
+      o.connect(g); g.connect(ac.destination); o.start(t + d); o.stop(t + d + 0.65);
+    });
+  }
+  getMic() {
+    if (this.an || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return Promise.resolve();
+    return navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: true } }).then((st) => {
+      this.stream = st; this.ensureAC();
+      const src = this.ac.createMediaStreamSource(st);
+      this.an = this.ac.createAnalyser(); this.an.fftSize = 1024; this.an.smoothingTimeConstant = 0.3;
+      src.connect(this.an); this.buf = new Uint8Array(this.an.fftSize);
+      this.setState({ mic: true });
+    }).catch(() => {});
+  }
+
+  level(t) {
+    if (this.an) {
+      this.an.getByteTimeDomainData(this.buf);
+      let s = 0; for (let i = 0; i < this.buf.length; i++) { const v = (this.buf[i] - 128) / 128; s += v * v; }
+      const rms = Math.sqrt(s / this.buf.length);
+      return Math.min(1, Math.max(0.03, rms * 5.5));
+    }
+    const env = (Math.sin(t * 1.3) + Math.sin(t * 2.7 + 1)) * 0.25 + 0.5;
+    const talking = Math.sin(t * 0.8) + Math.sin(t * 0.33) > -0.6;
+    return Math.max(0.03, talking ? env * (0.25 + 0.75 * Math.random()) : 0.04 * Math.random() + 0.02);
+  }
+
+  loop = () => {
+    this.raf = requestAnimationFrame(this.loop);
+    if (this.state.screen !== 'record') return;
+    if (this.state.rec === 'recording') {
+      const now = performance.now();
+      const l = this.level(now / 1000);
+      this.lvl = this.lvl * 0.45 + l * 0.55;
+      if (!this.lastPush || now - this.lastPush > 45) { this.hist.push(this.lvl); this.lastPush = now; if (this.hist.length > 600) this.hist.shift(); }
+      const ms = now - this.recStart;
+      if (Math.floor(ms / 100) !== Math.floor(this.state.recMs / 100)) this.setState({ recMs: ms });
+    }
+    this.draw();
+  };
+
+  draw() {
+    const c = this.cv; if (!c) return;
+    const dpr = window.devicePixelRatio || 1, w = c.clientWidth, h = c.clientHeight;
+    if (!w || !h) return;
+    if (c.width !== w * dpr || c.height !== h * dpr) { c.width = w * dpr; c.height = h * dpr; }
+    const x = c.getContext('2d'); x.setTransform(dpr, 0, 0, dpr, 0, 0); x.clearRect(0, 0, w, h);
+    const mid = h / 2, play = this.state.rec === 'idle' ? w * 0.5 : w * 0.62, step = 5, bw = 2.6;
+    x.fillStyle = '#cfc8c8';
+    for (let px = play + 8; px < w; px += 9) x.fillRect(px, mid - 0.75, 2, 1.5);
+    const n = this.hist.length;
+    x.fillStyle = '#E8566A';
+    for (let k = 0; k < n; k++) {
+      const px = play - (n - 1 - k) * step - bw;
+      if (px < -step) continue;
+      const bh = Math.max(2, this.hist[k] * (h - 30));
+      const r = Math.min(bw / 2, bh / 2);
+      x.beginPath();
+      if (x.roundRect) x.roundRect(px, mid - bh / 2, bw, bh, r); else x.rect(px, mid - bh / 2, bw, bh);
+      x.fill();
+    }
+    if (!n) { x.fillStyle = '#cfc8c8'; for (let px = play - 9; px > 0; px -= 9) x.fillRect(px, mid - 0.75, 2, 1.5); }
+    x.fillStyle = '#B4304A';
+    x.fillRect(play - 0.75, 6, 1.5, h - 12);
+    x.beginPath(); x.arc(play, 6, 4, 0, Math.PI * 2); x.fill();
+    x.beginPath(); x.arc(play, h - 6, 4, 0, Math.PI * 2); x.fill();
+  }
+
+  fmtRec(ms) {
+    const s = Math.floor(ms / 1000), m = Math.floor(s / 60), d = Math.floor((ms % 1000) / 100);
+    return String(m).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0') + ',' + d;
+  }
+
+  renderVals() {
+    const s = this.state, p = this.props;
+    const W = window.innerWidth, H = window.innerHeight;
+    const wide = W >= 640;
+    const sc = Math.min(1, (H - 48) / 844);
+    const standalone = !!(navigator.standalone || (window.matchMedia && matchMedia('(display-mode: standalone)').matches));
+    const dark = s.screen === 'splash' || s.screen === 'lock';
+    const top = wide ? '54px' : 'calc(env(safe-area-inset-top, 0px) + 6px)';
+    const bot = wide ? '28px' : 'max(env(safe-area-inset-bottom, 0px), 14px)';
+    const coral = '#E8566A', mute = '#8a8383';
+    const sess = Math.floor((s.now - this.sessionStart) / 1000);
+    const hh = String(Math.floor(sess / 3600)).padStart(2, '0'), mm = String(Math.floor(sess / 60) % 60).padStart(2, '0'), ss = String(sess % 60).padStart(2, '0');
+    const d = new Date(s.now);
+    const recording = s.rec === 'recording';
+    const labels = ['', 'Skuffende', 'Under middel', 'Okay', 'God', 'Rigtig god', 'Fremragende'];
+    const stars = [0, 1, 2, 3, 4, 5].map((i) => ({
+      label: (i + 1) + ' stjerner',
+      tap: () => this.setState({ rating: i + 1 }),
+      style: { width: 48, height: 52, display: 'flex', alignItems: 'center', justifyContent: 'center', transform: s.starsIn ? 'scale(1)' : 'scale(0.2)', opacity: s.starsIn ? 1 : 0, transition: `transform .55s cubic-bezier(.3,1.7,.5,1) ${i * 110}ms, opacity .3s ${i * 110}ms` },
+      pathStyle: { fill: i < s.rating ? coral : 'rgba(232,86,106,0)', transition: `fill .25s ease ${i < s.rating ? i * 70 : 0}ms` },
+    }));
+    const tab = (t) => () => this.go(t);
+    return {
+      wide,
+      frameStyle: wide
+        ? { position: 'relative', width: 390, height: 844, borderRadius: 52, overflow: 'hidden', background: 'var(--color-bg)', boxShadow: '0 0 0 11px #1d1a1a, 0 0 0 12px #3a3434, 0 40px 90px rgba(70,30,35,.28)', flex: 'none', zoom: sc }
+        : { position: 'relative', width: '100%', height: '100%', overflow: 'hidden', background: 'var(--color-bg)' },
+      topPadStyle: { height: top, flex: 'none' },
+      tabBarStyle: { display: 'flex', borderTop: '1px solid var(--color-divider)', background: 'var(--color-bg)', paddingBottom: bot, flex: 'none' },
+      recFootStyle: { padding: `0 22px ${bot}`, minHeight: 150, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', flex: 'none', paddingTop: 8, boxSizing: 'border-box' },
+      rateFootStyle: { padding: `14px 22px ${bot}`, flex: 'none' },
+      lockFootStyle: { width: '100%', boxSizing: 'border-box', display: 'flex', justifyContent: 'space-between', padding: `0 46px ${wide ? '40px' : 'calc(max(env(safe-area-inset-bottom, 0px), 14px) + 22px)'}` },
+      sheetStyle: { background: 'var(--color-bg)', borderRadius: '14px 14px 0 0', padding: `20px 20px ${bot}`, display: 'flex', flexDirection: 'column' },
+      statusStyle: { position: 'absolute', top: 0, left: 0, right: 0, height: wide ? 54 : 'env(safe-area-inset-top, 0px)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: wide ? '6px 30px 0 46px' : '4px 26px 0 34px', boxSizing: 'border-box', color: dark ? '#fff' : '#111', fontFamily: "-apple-system,'SF Pro Text',system-ui,sans-serif", zIndex: 30, pointerEvents: 'none' },
+      showStatus: (wide && s.screen !== 'lock') || (standalone && !dark && !wide),
+      clock: String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'),
+
+      isSplash: s.screen === 'splash', isApp: s.screen === 'app', isRecord: s.screen === 'record', isLock: s.screen === 'lock', isRate: s.screen === 'rate',
+      tabHome: s.tab === 'home', tabAppts: s.tab === 'appts', tabMsgs: s.tab === 'msgs', tabProfile: s.tab === 'profile', tabSafety: s.tab === 'safety',
+      c: { home: s.tab === 'home' ? coral : mute, appts: s.tab === 'appts' ? coral : mute, msgs: s.tab === 'msgs' ? coral : mute, profile: s.tab === 'profile' ? coral : mute, safety: s.tab === 'safety' ? coral : mute },
+      tabHomeGo: tab('home'), tabApptsGo: tab('appts'), tabMsgsGo: tab('msgs'), tabProfileGo: tab('profile'), tabSafetyGo: tab('safety'),
+      sessionTime: `${hh}:${mm}:${ss}`,
+      goRecord: () => this.go('record'), goHome: () => this.go('home'), goLock: () => this.go('lock'),
+
+      waveRef: this.waveRef,
+      recTime: this.fmtRec(s.recMs),
+      recDur: this.fmtRec(s.recMs).slice(0, 5),
+      recKicker: recording ? 'Optager' : s.rec === 'idle' ? 'Klar til optagelse' : 'Optagelse stoppet',
+      recKickerColor: recording ? '#B4304A' : '#6b6565',
+      recDotStyle: { width: 8, height: 8, borderRadius: '50%', background: recording ? coral : '#cfc8c8', animation: recording ? 'po-pulse 1s ease-in-out infinite' : 'none' },
+      showRecBtn: s.rec === 'idle' || recording,
+      recBtnLabel: recording ? 'Stop optagelse' : 'Optag',
+      recInnerStyle: recording
+        ? { width: 30, height: 30, borderRadius: 6, background: coral, transition: 'all .25s ease' }
+        : { width: 64, height: 64, borderRadius: 32, background: coral, transition: 'all .25s ease' },
+      toggleRec: () => {
+        if (s.rec === 'idle') {
+          this.ensureAC(); this.hist = []; this.lvl = 0; this.recStart = performance.now();
+          this.setState({ rec: 'recording', recMs: 0 }); this.getMic();
+        } else if (s.rec === 'recording') {
+          this.setState({ rec: 'stopped', recMs: performance.now() - this.recStart });
+        }
+      },
+      showSend: s.rec === 'stopped' || s.rec === 'sending',
+      sending: s.rec === 'sending', notSending: s.rec !== 'sending',
+      sendLabel: s.rec === 'sending' ? 'Sender' : 'Send',
+      sendRec: () => { if (s.rec !== 'stopped') return; this.setState({ rec: 'sending' }); this.later(() => this.setState({ rec: 'sent' }), 1200); },
+      deleteRec: () => { this.hist = []; this.setState({ rec: 'idle', recMs: 0 }); },
+      isSent: s.rec === 'sent',
+
+      lockTime: p.lockTime || '01:47',
+      notifStyle: { width: '100%', boxSizing: 'border-box', padding: '0 10px 26px', transform: s.notif ? 'translateY(0) scale(1)' : 'translateY(40px) scale(.96)', opacity: s.notif ? 1 : 0, transition: 'transform .5s cubic-bezier(.2,.9,.3,1.1), opacity .35s ease' },
+      openNotif: (e) => { e.stopPropagation(); if (s.notif) this.go('rate'); },
+      lockTap: () => { if (!s.notif) { this.clearT(); this.setState({ notif: true }); if (p.sound !== false) this.ding(); } },
+
+      photoSrc: s.photo || 'tess.jpg',
+      hasPhoto: s.photoOk,
+      photoStyle: { position: 'absolute', inset: 0, backgroundImage: `url("${s.photo || 'tess.jpg'}")`, backgroundSize: 'cover', backgroundPosition: 'center top' },
+      stars,
+      rating: s.rating,
+      rateLabel: labels[s.rating],
+      notSubmitted: !s.submitted, submitted: s.submitted,
+      submitStyle: { width: '100%', height: 56, border: '1px solid ' + coral, borderRadius: 4, color: '#B4304A', fontSize: 14, letterSpacing: '.2em', textTransform: 'uppercase', background: s.rating ? '#fff' : 'transparent', opacity: s.rating ? 1 : 0.45, transition: 'opacity .3s' },
+      submit: () => { if (s.rating) this.setState({ submitted: true }); },
+
+      unlock: () => this.ensureAC(),
+      hotTap: () => {
+        const t = Date.now(); this.taps = t - this.lastTap < 550 ? this.taps + 1 : 1; this.lastTap = t;
+        if (this.taps >= 3) { this.taps = 0; this.setState({ menu: true }); }
+      },
+      menuOpen: s.menu,
+      closeMenu: () => this.setState({ menu: false }),
+      stop: (e) => e.stopPropagation(),
+      scenes: [
+        { n: '1', label: 'Åbningsskærm', go: () => this.go('splash') },
+        { n: '2', label: 'Tess · Hjem med aktiv session', go: () => this.go('home') },
+        { n: '3', label: 'Tess · Optagelse', go: () => this.go('record') },
+        { n: '4', label: 'Storm · Låseskærm med notifikation', go: () => this.go('lock') },
+        { n: '5', label: 'Storm · Profil og bedømmelse', go: () => this.go('rate') },
+      ],
+      micLabel: s.mic ? 'Mikrofon er klar' : 'Giv adgang til mikrofon',
+      testMic: () => { this.ensureAC(); this.getMic(); },
+      onPhoto: (e) => {
+        const f = e.target.files && e.target.files[0]; if (!f) return;
+        const r = new FileReader();
+        r.onload = () => {
+          const img = new Image();
+          img.onload = () => {
+            const k = Math.min(1, 1000 / Math.max(img.width, img.height));
+            const cv = document.createElement('canvas'); cv.width = img.width * k; cv.height = img.height * k;
+            cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+            const url = cv.toDataURL('image/jpeg', 0.86);
+            try { localStorage.setItem('plusone-photo', url); } catch (err) {}
+            this.setState({ photo: url, photoOk: true, menu: false });
+          };
+          img.src = r.result;
+        };
+        r.readAsDataURL(f);
+      },
+    };
+  }
+}
+
+</script>
+</body>
+</html>
