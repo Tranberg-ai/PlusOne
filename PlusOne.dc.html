@@ -109,8 +109,17 @@ a{color:#B4304A}a:hover{color:#8f2238}
   <sc-if value="{{ tabMsgs }}" hint-placeholder-val="{{ false }}">
     <div style="padding:26px 22px;display:flex;flex-direction:column">
       <h1 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:38px">Beskeder</h1>
-      <div style="padding:16px 0;border-top:1px solid var(--color-divider)"><div style="display:flex;justify-content:space-between"><span style="font-size:15px;font-weight:600">PlusOne</span><span style="font-size:12px;color:#6b6565">20:16</span></div><div style="font-size:14px;color:#4a4545;margin-top:4px">Din session med Storm er startet. Husk samtykke før optagelse.</div></div>
-      <div style="padding:16px 0;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)"><div style="display:flex;justify-content:space-between"><span style="font-size:15px">Storm</span><span style="font-size:12px;color:#6b6565">13:42</span></div><div style="font-size:14px;color:#4a4545;margin-top:4px">Vi ses kl. 14.</div></div>
+      <sc-for list="{{ msgs }}" as="m" hint-placeholder-count="4">
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:14px 0;border-top:1px solid var(--color-divider)">
+          <div style="{{ m.avStyle }}">{{ m.initial }}</div>
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;justify-content:space-between;gap:8px"><span style="{{ m.nameStyle }}">{{ m.name }}</span><span style="{{ m.timeStyle }}">{{ m.time }}</span></div>
+            <div style="{{ m.textStyle }}">{{ m.text }}</div>
+          </div>
+          <sc-if value="{{ m.unread }}" hint-placeholder-val="{{ false }}"><span style="width:8px;height:8px;border-radius:50%;background:#E8566A;margin-top:24px;flex:none"></span></sc-if>
+        </div>
+      </sc-for>
+      <div style="border-top:1px solid var(--color-divider)"></div>
     </div>
   </sc-if>
 
@@ -316,6 +325,26 @@ a{color:#B4304A}a:hover{color:#8f2238}
         <input value="{{ elapsedInput }}" onChange="{{ onElapsed }}" inputmode="numeric" placeholder="00:09:57" style="width:96px;height:40px;border:1px solid var(--color-divider);border-radius:4px;background:#fff;text-align:center;font:inherit;font-size:16px;font-variant-numeric:tabular-nums;color:var(--color-text)">
         <button onClick="{{ setElapsed }}" style="height:40px;padding:0 14px;border:1px solid #E8566A;border-radius:4px;color:#B4304A;font-size:12px;letter-spacing:.14em;text-transform:uppercase">Sæt</button>
       </div>
+      <div style="padding:12px 4px 6px;border-top:1px solid #e2dcdc;display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:baseline;gap:14px"><span style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#B4304A;width:18px">✉</span><span style="font-size:15px">Beskeder</span></div>
+        <sc-for list="{{ msgs }}" as="m" hint-placeholder-count="3">
+          <div style="display:flex;align-items:center;gap:10px;padding-left:32px">
+            <div style="flex:1;min-width:0;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#201f1d"><strong style="font-weight:600">{{ m.name }}</strong> · {{ m.text }}</div>
+            <button onClick="{{ m.toggle }}" aria-label="Ulæst" style="{{ m.toggleStyle }}">●</button>
+            <button onClick="{{ m.remove }}" aria-label="Slet" style="width:36px;height:36px;flex:none;display:flex;align-items:center;justify-content:center;color:#6b6565;font-size:18px">✕</button>
+          </div>
+        </sc-for>
+        <div style="display:flex;flex-direction:column;gap:6px;padding-left:32px">
+          <div style="display:flex;gap:6px">
+            <input value="{{ newName }}" onChange="{{ onNewName }}" placeholder="Navn" style="flex:1;min-width:0;height:40px;border:1px solid #e2dcdc;border-radius:4px;background:#fff;padding:0 10px;font:inherit;font-size:16px;color:#201f1d">
+            <input value="{{ newTime }}" onChange="{{ onNewTime }}" placeholder="Tid" style="width:76px;height:40px;border:1px solid #e2dcdc;border-radius:4px;background:#fff;padding:0 10px;font:inherit;font-size:16px;color:#201f1d">
+          </div>
+          <div style="display:flex;gap:6px">
+            <input value="{{ newText }}" onChange="{{ onNewText }}" placeholder="Besked" style="flex:1;min-width:0;height:40px;border:1px solid #e2dcdc;border-radius:4px;background:#fff;padding:0 10px;font:inherit;font-size:16px;color:#201f1d">
+            <button onClick="{{ addMsg }}" style="height:40px;padding:0 14px;border:1px solid #E8566A;border-radius:4px;color:#B4304A;font-size:12px;letter-spacing:.14em;text-transform:uppercase">Tilføj</button>
+          </div>
+        </div>
+      </div>
       <button onClick="{{ testMic }}" style="display:flex;align-items:baseline;gap:14px;text-align:left;padding:13px 4px;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider);min-height:44px">
         <span style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#B4304A;width:18px">◦</span>
         <span style="font-size:15px">{{ micLabel }}</span>
@@ -338,7 +367,17 @@ a{color:#B4304A}a:hover{color:#8f2238}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;startScreen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;record&quot;,&quot;lock&quot;,&quot;rate&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;splashSeconds&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0.5,&quot;max&quot;:6,&quot;step&quot;:0.5,&quot;unit&quot;:&quot;s&quot;,&quot;default&quot;:5,&quot;tsType&quot;:&quot;number&quot;},&quot;notifDelay&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:20,&quot;step&quot;:1,&quot;unit&quot;:&quot;s&quot;,&quot;default&quot;:4,&quot;tsType&quot;:&quot;number&quot;},&quot;sound&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;lockTime&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;01:47&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { screen: 'splash', tab: 'home', rec: 'idle', recMs: 0, now: Date.now(), starsIn: false, rating: 0, submitted: false, notif: false, menu: false, photo: null, photoErr: false, mic: false, elapsedInput: '' };
+  state = { screen: 'splash', tab: 'home', rec: 'idle', recMs: 0, now: Date.now(), starsIn: false, rating: 0, submitted: false, notif: false, menu: false, photo: null, photoErr: false, mic: false, elapsedInput: '', msgs: null, newName: '', newTime: '', newText: '' };
+  defaultMsgs = [
+    { name: 'PlusOne', time: '20:16', text: 'Din session med Storm er startet. Husk samtykke før optagelse.', unread: true },
+    { name: 'Storm', time: '13:42', text: 'Vi ses kl. 14. Jeg står ved indgangen.', unread: true },
+    { name: 'Maja', time: '13:05', text: 'Skriv når du er hjemme ❤︎', unread: false },
+    { name: 'Frederik', time: 'I går', text: 'Tusind tak for i aftes. Mine forældre var vilde med dig.', unread: false },
+    { name: 'PlusOne', time: 'I går', text: 'Ny booking: Gallaaften onsdag 18:30–01:00.', unread: false },
+    { name: 'Jonas', time: 'Tor.', text: 'Er du ledig til et bryllup i december?', unread: false },
+    { name: 'PlusOne', time: 'Man.', text: 'Du har fået en ny bedømmelse: 6 ud af 6.', unread: false },
+  ];
+  saveMsgs(list) { this.setState({ msgs: list }); try { localStorage.setItem('plusone-msgs', JSON.stringify(list)); } catch (e) {} }
   sessionStart = Date.now() - 597000;
   hist = [];
   timers = [];
@@ -349,6 +388,7 @@ class Component extends DCLogic {
     let p = null;
     try { p = localStorage.getItem('plusone-photo'); if (p) this.setState({ photo: p }); } catch (e) {}
     this.probe(p || 'tess.jpg');
+    try { const m = JSON.parse(localStorage.getItem('plusone-msgs')); if (Array.isArray(m)) this.setState({ msgs: m }); } catch (e) {}
     try { const st = Number(localStorage.getItem('plusone-session-start')); if (st) this.sessionStart = st; } catch (e) {}
     this.tick = setInterval(() => this.setState({ now: Date.now() }), 500);
     this.onResize = () => this.forceUpdate();
@@ -500,7 +540,7 @@ class Component extends DCLogic {
       recFootStyle: { padding: `0 22px ${bot}`, minHeight: 150, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', flex: 'none', paddingTop: 8, boxSizing: 'border-box' },
       rateFootStyle: { padding: `14px 22px ${bot}`, flex: 'none' },
       lockFootStyle: { width: '100%', boxSizing: 'border-box', display: 'flex', justifyContent: 'space-between', padding: `0 46px ${wide ? '40px' : 'calc(max(env(safe-area-inset-bottom, 0px), 14px) + 22px)'}` },
-      sheetStyle: { background: '#ffffff', color: '#201f1d', boxShadow: '0 -10px 40px rgba(0,0,0,.25)', position: 'relative', zIndex: 2, borderRadius: '14px 14px 0 0', padding: `20px 20px ${bot}`, display: 'flex', flexDirection: 'column' },
+      sheetStyle: { background: '#ffffff', color: '#201f1d', boxShadow: '0 -10px 40px rgba(0,0,0,.25)', position: 'relative', zIndex: 2, borderRadius: '14px 14px 0 0', padding: `20px 20px ${bot}`, display: 'flex', flexDirection: 'column', maxHeight: '88%', overflowY: 'auto', WebkitOverflowScrolling: 'touch', boxSizing: 'border-box' },
       statusStyle: { position: 'absolute', top: 0, left: 0, right: 0, height: wide ? 54 : 'env(safe-area-inset-top, 0px)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: wide ? '6px 30px 0 46px' : '4px 26px 0 34px', boxSizing: 'border-box', color: dark ? '#fff' : '#111', fontFamily: "-apple-system,'SF Pro Text',system-ui,sans-serif", zIndex: 30, pointerEvents: 'none' },
       showStatus: wide && s.screen !== 'lock',
       clock: String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'),
@@ -574,6 +614,29 @@ class Component extends DCLogic {
         { n: '4', label: 'Storm · Låseskærm med notifikation', go: () => this.go('lock') },
         { n: '5', label: 'Storm · Profil og bedømmelse', go: () => this.go('rate') },
       ],
+      msgs: (s.msgs || this.defaultMsgs).map((m, i, all) => {
+        const po = m.name === 'PlusOne';
+        return { ...m, initial: (m.name || '?').charAt(0).toUpperCase(),
+          avStyle: { width: 42, height: 42, flex: 'none', borderRadius: '50%', border: '1px solid ' + (po ? '#E8566A' : 'var(--color-divider)'), display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Cormorant Garamond',serif", fontSize: 20, color: po ? '#B4304A' : 'var(--color-text)' },
+          nameStyle: { fontSize: 15, fontWeight: m.unread ? 600 : 400 },
+          timeStyle: { fontSize: 12, color: m.unread ? '#B4304A' : '#6b6565', flex: 'none' },
+          textStyle: { fontSize: 14, color: m.unread ? 'var(--color-text)' : '#4a4545', marginTop: 3, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
+          toggleStyle: { width: 36, height: 36, flex: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, color: m.unread ? '#E8566A' : '#d6cfcf' },
+          remove: () => this.saveMsgs(all.filter((_, j) => j !== i)),
+          toggle: () => this.saveMsgs(all.map((x, j) => j === i ? { ...x, unread: !x.unread } : x)),
+        };
+      }),
+      newName: s.newName, newTime: s.newTime, newText: s.newText,
+      onNewName: (e) => this.setState({ newName: e.target.value }),
+      onNewTime: (e) => this.setState({ newTime: e.target.value }),
+      onNewText: (e) => this.setState({ newText: e.target.value }),
+      addMsg: () => {
+        if (!s.newName.trim() || !s.newText.trim()) return;
+        const d2 = new Date();
+        const t = s.newTime.trim() || (String(d2.getHours()).padStart(2, '0') + ':' + String(d2.getMinutes()).padStart(2, '0'));
+        this.saveMsgs([{ name: s.newName.trim(), time: t, text: s.newText.trim(), unread: true }, ...(s.msgs || this.defaultMsgs)]);
+        this.setState({ newName: '', newTime: '', newText: '' });
+      },
       elapsedInput: s.elapsedInput,
       onElapsed: (e) => this.setState({ elapsedInput: e.target.value }),
       setElapsed: () => {
