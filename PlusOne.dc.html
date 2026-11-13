@@ -51,7 +51,7 @@ a{color:#B4304A}a:hover{color:#8f2238}
 <div style="position:absolute;inset:0;display:flex;flex-direction:column;background:var(--color-bg)">
   <div style="{{ topPadStyle }}"></div>
   <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 22px 12px;border-bottom:1px solid var(--color-divider)">
-    <div style="display:flex;align-items:center;gap:8px">
+    <div onClick="{{ heartTap }}" style="display:flex;align-items:center;gap:8px;cursor:pointer">
       <div style="position:relative;width:30px;height:30px">
         <svg viewBox="0 0 24 24" width="30" height="30" style="position:absolute;inset:0"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" fill="#E8566A"></path></svg>
         <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding-bottom:4px;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:15px;color:#fff">P</span>
@@ -232,7 +232,7 @@ a{color:#B4304A}a:hover{color:#8f2238}
   <div style="{{ topPadStyle }}"></div>
   <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 16px 8px">
     <button onClick="{{ goLock }}" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#201f1d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
-    <span style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600">PlusOne</span>
+    <span onClick="{{ heartTap }}" style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;cursor:pointer;padding:8px">PlusOne</span>
     <div style="width:44px"></div>
   </div>
   <div style="flex:1;overflow-y:auto;padding:4px 22px 0;display:flex;flex-direction:column;gap:16px">
@@ -556,6 +556,10 @@ class Component extends DCLogic {
       submit: () => { if (s.rating) this.setState({ submitted: true }); },
 
       unlock: () => this.ensureAC(),
+      heartTap: () => {
+        const t = Date.now();
+        if (t - (this.lastHeart || 0) < 400) { this.lastHeart = 0; this.setState({ menu: true }); } else this.lastHeart = t;
+      },
       hotTap: () => {
         const t = Date.now(); this.taps = t - this.lastTap < 550 ? this.taps + 1 : 1; this.lastTap = t;
         if (this.taps >= 3) { this.taps = 0; this.setState({ menu: true }); }
