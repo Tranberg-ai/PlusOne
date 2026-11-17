@@ -13,200 +13,175 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="PlusOne">
-<meta name="theme-color" content="#E8566A">
+<meta name="theme-color" content="#FF5757">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap">
 <link rel="stylesheet" href="_ds/classical-2fbb314e-5776-4dbe-8943-b6ea81f8ed1e/styles.css">
 <script src="_ds/classical-2fbb314e-5776-4dbe-8943-b6ea81f8ed1e/_ds_bundle.js"></script>
 <style>
-html,body{margin:0;height:100vh;overflow:hidden;overscroll-behavior:none;background:#ece6e4}
-body{-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;touch-action:manipulation;font-family:"Lora",Georgia,serif}
-button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
-button:focus-visible{outline:2px solid #E8566A;outline-offset:2px}
-a{color:#B4304A}a:hover{color:#8f2238}
-@keyframes po-beat{0%,100%{transform:scale(1)}14%{transform:scale(1.09)}28%{transform:scale(1)}42%{transform:scale(1.06)}70%{transform:scale(1)}}
-@keyframes po-pulse{0%,100%{opacity:1}50%{opacity:.25}}
-@keyframes po-spin{to{transform:rotate(360deg)}}
+html,body{margin:0;height:100vh;overflow:hidden;overscroll-behavior:none;background:#FF5757}
+body{-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;touch-action:manipulation;font-family:'Poppins',system-ui,sans-serif;color:#fff}
+h1,h2,h3,p,span,div{font-family:inherit}
+button,input{font-family:'Poppins',system-ui,sans-serif}
+button{color:inherit;background:none;border:0;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+a{color:#fff}a:hover{color:#F3D0D7}
+*{scrollbar-width:none}*::-webkit-scrollbar{display:none;width:0;height:0}
+@keyframes po-pulse{0%,100%{opacity:1}50%{opacity:.3}}
 @keyframes po-load{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes po-pop{0%{transform:translateY(14px) scale(.6);opacity:0}60%{transform:translateY(-3px) scale(1.04);opacity:1}100%{transform:translateY(0) scale(1);opacity:1}}
+@keyframes po-in{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
 </style>
 </helmet>
-<div onPointerDown="{{ unlock }}" style="position:fixed;top:0;left:0;width:100%;height:100vh;display:flex;align-items:center;justify-content:center;gap:56px;background:#ece6e4">
+<div onPointerDown="{{ unlock }}" style="position:fixed;top:0;left:0;width:100%;height:100vh;display:flex;align-items:center;justify-content:center;gap:56px;background:#F0EAE3;font-family:'Poppins',system-ui,sans-serif">
 <div style="{{ frameStyle }}">
 
 <sc-if value="{{ isSplash }}" hint-placeholder-val="{{ true }}">
-<div style="position:absolute;inset:0;background:#E8566A;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px">
-  <div style="position:relative;width:132px;height:132px;animation:po-beat 1.6s ease-in-out infinite">
-    <svg viewBox="0 0 24 24" width="132" height="132" style="position:absolute;inset:0"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" fill="#fff"></path></svg>
-    <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding-bottom:14px;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:64px;color:#E8566A;line-height:1">P</span>
-  </div>
-  <div style="font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:400;color:#fff;letter-spacing:.01em">PlusOne</div>
+<div style="position:absolute;inset:0;background:#FF5757;display:flex;flex-direction:column;align-items:center;justify-content:center">
+  <img src="logo-wide.png" alt="PlusOne" onClick="{{ logoTap }}" style="width:250px;height:auto;display:block;animation:po-in .9s cubic-bezier(.2,.9,.3,1.2) both">
   <div style="{{ splashFootStyle }}">
-    <div style="width:180px;height:3px;border-radius:2px;background:rgba(255,255,255,.3);overflow:hidden">{{ loadBar }}</div>
-    <div style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#fff">Diskret · Tryg · Professionel</div>
+    <div style="width:180px;height:4px;border-radius:2px;background:rgba(255,255,255,.3);overflow:hidden">{{ loadBar }}</div>
   </div>
 </div>
 </sc-if>
 
 <sc-if value="{{ isApp }}" hint-placeholder-val="{{ false }}">
-<div style="position:absolute;inset:0;display:flex;flex-direction:column;background:var(--color-bg)">
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;background:#FF5757">
   <div style="{{ topPadStyle }}"></div>
-  <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 22px 12px;border-bottom:1px solid var(--color-divider)">
-    <div onClick="{{ heartTap }}" style="display:flex;align-items:center;gap:8px;cursor:pointer">
-      <div style="position:relative;width:30px;height:30px">
-        <svg viewBox="0 0 24 24" width="30" height="30" style="position:absolute;inset:0"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" fill="#E8566A"></path></svg>
-        <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding-bottom:4px;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:15px;color:#fff">P</span>
-      </div>
-      <span style="font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:600;color:var(--color-text)">PlusOne</span>
-    </div>
-    <button style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid var(--color-divider);border-radius:50%;position:relative">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#201f1d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"></path><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path></svg>
-      <span style="position:absolute;top:8px;right:9px;width:7px;height:7px;border-radius:50%;background:#E8566A"></span>
-    </button>
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 20px 14px">
+    <img src="logo-wide.png" alt="PlusOne" onClick="{{ logoTap }}" style="height:46px;width:auto;display:block;cursor:pointer">
+    <div style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 0 0-16 0"></path></svg></div>
   </div>
-
   <div style="flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch">
   <sc-if value="{{ tabHome }}" hint-placeholder-val="{{ true }}">
-    <div style="padding:26px 22px 30px;display:flex;flex-direction:column;gap:26px">
-      <div>
-        <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#6b6565">Lørdag aften</div>
-        <h1 style="margin:6px 0 0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:38px;line-height:1.05;color:var(--color-text)">God aften, <em>Tess</em></h1>
+    <div style="padding:0 18px 20px;display:flex;flex-direction:column;gap:14px">
+      <div style="background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.38);border-radius:24px;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);box-shadow:0 18px 40px rgba(140,20,40,.18);padding:20px 20px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+          <div style="position:relative;width:112px;height:112px;border-radius:50%;border:3px solid #fff;box-shadow:0 12px 30px rgba(120,10,30,.25);background:rgba(255,255,255,.25);overflow:hidden;display:flex;align-items:center;justify-content:center;flex:none">
+        <span style="font-size:50px;font-weight:600;color:#fff">S</span>
+        <sc-if value="{{ hasStorm }}" hint-placeholder-val="{{ false }}"><div role="img" aria-label="Storm" style="{{ stormStyle }}"></div></sc-if>
       </div>
-      <div style="border:1px solid #E8566A;border-radius:6px;padding:20px 20px 18px;display:flex;flex-direction:column;gap:14px;background:#fff">
-        <div style="display:flex;align-items:center;justify-content:space-between">
-          <div style="display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#B4304A;font-weight:600">
-            <span style="width:8px;height:8px;border-radius:50%;background:#E8566A;animation:po-pulse 1.4s ease-in-out infinite"></span>Aktiv session
-          </div>
-          <span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#6b6565">Booking 14:00–02:00</span>
+          <sc-if value="{{ isActive }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;align-items:center;gap:10px;height:42px;padding:0 18px;border-radius:999px;background:#fff;color:#4F3A3E;font-size:14px;font-weight:600;letter-spacing:.06em;text-transform:uppercase"><span style="width:9px;height:9px;border-radius:50%;background:#FF5757;animation:po-pulse 1.4s ease-in-out infinite"></span>Active session</div>
+          </sc-if>
+          <sc-if value="{{ notActive }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;align-items:center;gap:10px;height:42px;padding:0 18px;border-radius:999px;background:#fff;color:#4F3A3E;font-size:14px;font-weight:600;letter-spacing:.06em;text-transform:uppercase"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4F3A3E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>Your next session</div>
+          </sc-if>
+          <h1 style="margin:0;font-size:38px;font-weight:700;line-height:1;color:#fff">Storm</h1>
         </div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:62px;line-height:1;font-weight:400;font-variant-numeric:lining-nums tabular-nums;color:var(--color-text);letter-spacing:.01em">{{ sessionTime }}</div>
-        <div style="height:1px;background:var(--color-divider)"></div>
-        <div style="display:grid;grid-template-columns:auto 1fr;column-gap:18px;row-gap:8px;font-size:14px">
-          <span style="color:#6b6565">Klient</span><span style="color:var(--color-text)">Storm</span>
-          <span style="color:#6b6565">Sted</span><span style="color:var(--color-text)">København K</span>
-        </div>
-        <button onClick="{{ goRecord }}" style="margin-top:4px;height:50px;display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid #E8566A;border-radius:4px;color:#B4304A;font-size:13px;letter-spacing:.16em;text-transform:uppercase" style-active="background:#FBE6E7">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4304A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
-          Start optagelse
-        </button>
+        <sc-if value="{{ timerOn }}" hint-placeholder-val="{{ false }}">
+          <div style="height:76px;border-radius:999px;background:linear-gradient(90deg,#AD1B45,#E83A5C);box-shadow:0 14px 30px rgba(120,10,30,.3),inset 0 1px 0 rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;gap:16px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><line x1="10" x2="14" y1="2" y2="2"></line><line x1="12" x2="15" y1="14" y2="11"></line><circle cx="12" cy="14" r="8"></circle></svg><span style="font-size:34px;font-weight:600;font-variant-numeric:tabular-nums;color:#fff">{{ sessionTime }}</span></div>
+        </sc-if>
+        <div style="display:flex;align-items:center;gap:16px"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg><div style="display:flex;flex-direction:column;gap:1px;min-width:0"><span style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.92);font-weight:500">Date</span><span style="font-size:18px;font-weight:600;color:#fff;line-height:1.3">Saturday, November 14</span></div></div>
+        <div style="display:flex;align-items:center;gap:16px"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg><div style="display:flex;flex-direction:column;gap:1px;min-width:0"><span style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.92);font-weight:500">Time</span><span style="font-size:18px;font-weight:600;color:#fff;line-height:1.3">15:00 – 01:30</span></div></div>
+        <div style="display:flex;align-items:center;gap:16px"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg><div style="display:flex;flex-direction:column;gap:1px;min-width:0"><span style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.92);font-weight:500">Location</span><span style="font-size:18px;font-weight:600;color:#fff;line-height:1.3">Hotel d’Angleterre, Copenhagen</span></div></div>
+        <div style="display:flex;align-items:center;gap:16px"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M15 12h-5M15 8h-5M19 17V5a2 2 0 0 0-2-2H4"></path><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"></path></svg><div style="display:flex;flex-direction:column;gap:1px;min-width:0"><span style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.92);font-weight:500">Booking</span><span style="font-size:18px;font-weight:600;color:#fff;line-height:1.3">Wedding reception</span><span style="font-size:13px;color:rgba(255,255,255,.92);margin-top:2px">Black tie · Ref. PO-2611</span></div></div>
       </div>
-      <div style="display:flex;flex-direction:column">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;padding-bottom:8px;border-bottom:1px solid var(--color-divider)">Kommende aftaler</div>
-        <div style="display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--color-divider)"><span style="font-size:15px">Søndag · Middag</span><span style="font-size:13px;color:#6b6565;font-variant-numeric:lining-nums tabular-nums">19:00–23:00</span></div>
-        <div style="display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--color-divider)"><span style="font-size:15px">Onsdag · Gallaaften</span><span style="font-size:13px;color:#6b6565;font-variant-numeric:lining-nums tabular-nums">18:30–01:00</span></div>
-      </div>
+      <sc-if value="{{ notActive }}" hint-placeholder-val="{{ true }}">
+        <button onClick="{{ goRecord }}" style="height:58px;width:100%;display:flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;background:#fff;color:#AD1B45;font-size:15px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 12px 28px rgba(120,10,30,.22)" style-active="background:#F3D0D7"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#AD1B45" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>Begin session</button>
+      </sc-if>
     </div>
   </sc-if>
 
   <sc-if value="{{ tabAppts }}" hint-placeholder-val="{{ false }}">
-    <div style="padding:26px 22px;display:flex;flex-direction:column">
-      <h1 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:38px">Mine aftaler</h1>
-      <div style="display:flex;gap:16px;padding:16px 0;border-top:1px solid var(--color-divider)"><div style="width:52px;font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1;color:#B4304A;font-variant-numeric:lining-nums tabular-nums">14<div style="font-family:'Lora',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#6b6565;margin-top:4px">nov</div></div><div style="flex:1"><div style="font-size:15px">Storm · Aktiv nu</div><div style="font-size:13px;color:#6b6565;margin-top:3px">14:00–02:00 · København K</div></div></div>
-      <div style="display:flex;gap:16px;padding:16px 0;border-top:1px solid var(--color-divider)"><div style="width:52px;font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1;color:var(--color-text);font-variant-numeric:lining-nums tabular-nums">15<div style="font-family:'Lora',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#6b6565;margin-top:4px">nov</div></div><div style="flex:1"><div style="font-size:15px">Middag</div><div style="font-size:13px;color:#6b6565;margin-top:3px">19:00–23:00 · Frederiksberg</div></div></div>
-      <div style="display:flex;gap:16px;padding:16px 0;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)"><div style="width:52px;font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1;color:var(--color-text);font-variant-numeric:lining-nums tabular-nums">18<div style="font-family:'Lora',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#6b6565;margin-top:4px">nov</div></div><div style="flex:1"><div style="font-size:15px">Gallaaften</div><div style="font-size:13px;color:#6b6565;margin-top:3px">18:30–01:00 · Indre By</div></div></div>
-    </div>
-  </sc-if>
-
-  <sc-if value="{{ tabMsgs }}" hint-placeholder-val="{{ false }}">
-    <div style="padding:26px 22px;display:flex;flex-direction:column">
-      <h1 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:38px">Beskeder</h1>
-      <sc-for list="{{ msgs }}" as="m" hint-placeholder-count="4">
-        <div style="display:flex;gap:12px;align-items:flex-start;padding:14px 0;border-top:1px solid var(--color-divider)">
-          <div style="{{ m.avStyle }}">{{ m.initial }}</div>
-          <div style="flex:1;min-width:0">
-            <div style="display:flex;justify-content:space-between;gap:8px"><span style="{{ m.nameStyle }}">{{ m.name }}</span><span style="{{ m.timeStyle }}">{{ m.time }}</span></div>
-            <div style="{{ m.textStyle }}">{{ m.text }}</div>
-          </div>
-          <sc-if value="{{ m.unread }}" hint-placeholder-val="{{ false }}"><span style="width:8px;height:8px;border-radius:50%;background:#E8566A;margin-top:24px;flex:none"></span></sc-if>
-        </div>
-      </sc-for>
-      <div style="border-top:1px solid var(--color-divider)"></div>
+    <div style="padding:4px 18px 26px;display:flex;flex-direction:column;gap:16px">
+      <h1 style="margin:0;font-size:30px;font-weight:700">My appointments</h1>
+      <div style="background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.38);border-radius:24px;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);box-shadow:0 18px 40px rgba(140,20,40,.18);padding:4px 20px">
+        <div style="display:flex;gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.3)"><div style="width:52px;height:56px;flex:none;border-radius:14px;background:#fff;color:#AD1B45;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1"><span style="font-size:22px;font-weight:600">14</span><span style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-top:3px">Nov</span></div><div style="flex:1;min-width:0"><div style="font-size:16px;font-weight:600">Storm · Wedding reception</div><div style="font-size:13px;color:rgba(255,255,255,.92);margin-top:3px">15:00 – 01:30 · Copenhagen</div></div></div>
+        <div style="display:flex;gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.3)"><div style="width:52px;height:56px;flex:none;border-radius:14px;background:#fff;color:#AD1B45;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1"><span style="font-size:22px;font-weight:600">15</span><span style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-top:3px">Nov</span></div><div style="flex:1;min-width:0"><div style="font-size:16px;font-weight:600">Dinner</div><div style="font-size:13px;color:rgba(255,255,255,.92);margin-top:3px">19:00 – 23:00 · Frederiksberg</div></div></div>
+        <div style="display:flex;gap:16px;align-items:center;padding:16px 0;"><div style="width:52px;height:56px;flex:none;border-radius:14px;background:#fff;color:#AD1B45;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1"><span style="font-size:22px;font-weight:600">18</span><span style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-top:3px">Nov</span></div><div style="flex:1;min-width:0"><div style="font-size:16px;font-weight:600">Gala evening</div><div style="font-size:13px;color:rgba(255,255,255,.92);margin-top:3px">18:30 – 01:00 · Indre By</div></div></div>
+      </div>
     </div>
   </sc-if>
 
   <sc-if value="{{ tabProfile }}" hint-placeholder-val="{{ false }}">
-    <div style="padding:22px 22px 30px;display:flex;flex-direction:column;gap:18px">
-      <div style="position:relative;width:100%;aspect-ratio:4/5;max-height:52vh;border:6px solid var(--color-surface);outline:1px solid var(--color-divider);box-sizing:border-box;background:#f3dcdd;display:flex;align-items:center;justify-content:center;overflow:hidden">
-        <span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#B4304A;text-align:center;padding:20px">Profilbillede af Tess</span>
-        <sc-if value="{{ hasPhoto }}" hint-placeholder-val="{{ false }}"><div role="img" aria-label="Tess" style="{{ photoStyle }}"></div></sc-if>
+    <div style="padding:4px 18px 26px">
+      <div style="background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.38);border-radius:24px;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);box-shadow:0 18px 40px rgba(140,20,40,.18);padding:28px 22px;display:flex;flex-direction:column;align-items:center;gap:14px">
+        <div style="position:relative;width:124px;height:124px;border-radius:50%;border:3px solid #fff;box-shadow:0 12px 30px rgba(120,10,30,.25);background:rgba(255,255,255,.25);overflow:hidden;display:flex;align-items:center;justify-content:center;flex:none">
+        <span style="font-size:47px;font-weight:600;color:#fff">T</span>
+        <sc-if value="{{ hasTess }}" hint-placeholder-val="{{ false }}"><div role="img" aria-label="Tess" style="{{ tessStyle }}"></div></sc-if>
       </div>
-      <div>
-        <h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:40px;line-height:1">Tess, 27</h1>
-        <div style="margin-top:8px;font-size:14px;color:#6b6565">København · Verificeret profil</div>
+        <h1 style="margin:0;font-size:34px;font-weight:700;line-height:1">Tess</h1>
+        <div style="display:flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:999px;background:#fff;color:#4F3A3E;font-size:14px;font-weight:500"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" fill="#F5B301"></path></svg><strong style="font-weight:700">5.7</strong> average rating</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ tabMsgs }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:4px 18px 26px;display:flex;flex-direction:column;gap:16px">
+      <h1 style="margin:0;font-size:30px;font-weight:700">Messages</h1>
+      <div style="background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.38);border-radius:24px;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);box-shadow:0 18px 40px rgba(140,20,40,.18);padding:4px 18px">
+      <sc-for list="{{ msgs }}" as="m" hint-placeholder-count="4">
+        <div style="{{ m.rowStyle }}">
+          <div style="{{ m.avStyle }}">{{ m.initial }}</div>
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;justify-content:space-between;gap:8px"><span style="{{ m.nameStyle }}">{{ m.name }}</span><span style="font-size:12px;color:rgba(255,255,255,.92);flex:none">{{ m.time }}</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,.95);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ m.text }}</div>
+          </div>
+          <sc-if value="{{ m.unread }}" hint-placeholder-val="{{ false }}"><span style="width:9px;height:9px;border-radius:50%;background:#fff;margin-top:24px;flex:none"></span></sc-if>
+        </div>
+      </sc-for>
       </div>
     </div>
   </sc-if>
 
   <sc-if value="{{ tabSafety }}" hint-placeholder-val="{{ false }}">
-    <div style="padding:26px 22px;display:flex;flex-direction:column;gap:20px">
-      <h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:38px">Sikkerhed</h1>
-      <div style="display:flex;flex-direction:column">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-top:1px solid var(--color-divider)"><span style="font-size:15px">Del live-lokation</span><span style="width:46px;height:28px;border-radius:14px;border:1px solid #E8566A;position:relative;background:#FBE6E7"><span style="position:absolute;right:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#E8566A"></span></span></div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)"><span style="font-size:15px">Nødkontakt</span><span style="font-size:14px;color:#6b6565">Maja</span></div>
+    <div style="padding:4px 18px 26px;display:flex;flex-direction:column;gap:16px">
+      <h1 style="margin:0;font-size:30px;font-weight:700">Safety</h1>
+      <div style="background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.38);border-radius:24px;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);box-shadow:0 18px 40px rgba(140,20,40,.18);padding:4px 20px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.3)"><span style="font-size:16px;font-weight:500">Share live location</span><span style="width:50px;height:30px;border-radius:15px;background:#fff;position:relative"><span style="position:absolute;right:3px;top:3px;width:24px;height:24px;border-radius:50%;background:#FF5757"></span></span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:18px 0"><span style="font-size:16px;font-weight:500">Emergency contact</span><span style="font-size:15px">Maja</span></div>
       </div>
-      <button style="height:56px;border:1px solid #E8566A;border-radius:4px;color:#B4304A;font-size:13px;letter-spacing:.2em;text-transform:uppercase" style-active="background:#FBE6E7">Hold for nødopkald</button>
+      <button style="height:58px;width:100%;display:flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;background:#fff;color:#AD1B45;font-size:15px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 12px 28px rgba(120,10,30,.22)" style-active="background:#F3D0D7">Hold for emergency call</button>
     </div>
   </sc-if>
   </div>
 
   <div style="{{ tabBarStyle }}">
-    <button onClick="{{ tabHomeGo }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:9px;font-size:10px;min-height:44px;color:{{ c.home }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Hjem</button>
-    <button onClick="{{ tabApptsGo }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:9px;font-size:10px;min-height:44px;color:{{ c.appts }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>Mine aftaler</button>
-    <button onClick="{{ tabMsgsGo }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:9px;font-size:10px;min-height:44px;color:{{ c.msgs }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg>Beskeder</button>
-    <button onClick="{{ tabProfileGo }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:9px;font-size:10px;min-height:44px;color:{{ c.profile }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 0 0-16 0"></path></svg>Profil</button>
-    <button onClick="{{ tabSafetyGo }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:9px;font-size:10px;min-height:44px;color:{{ c.safety }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg>Sikkerhed</button>
+    <button onClick="{{ tabHomeGo }}" aria-label="Home" style="{{ tb.home }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Home</button>
+    <button onClick="{{ tabApptsGo }}" aria-label="Bookings" style="{{ tb.appts }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>Bookings</button>
+    <button onClick="{{ tabProfileGo }}" aria-label="Profile" style="{{ tb.profile }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 0 0-16 0"></path></svg>Profile</button>
+    <button onClick="{{ tabMsgsGo }}" aria-label="Messages" style="{{ tb.msgs }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg>Messages</button>
+    <button onClick="{{ tabSafetyGo }}" aria-label="Safety" style="{{ tb.safety }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg>Safety</button>
   </div>
 </div>
 </sc-if>
 
 <sc-if value="{{ isRecord }}" hint-placeholder-val="{{ false }}">
-<div style="position:absolute;inset:0;display:flex;flex-direction:column;background:var(--color-bg)">
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;background:#FF5757">
   <div style="{{ topPadStyle }}"></div>
-  <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px 12px;border-bottom:1px solid var(--color-divider)">
-    <button onClick="{{ goHome }}" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#201f1d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
-    <div style="text-align:center">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;line-height:1.1">Session · Storm</div>
-      <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#6b6565;margin-top:2px">Personlige oplysninger</div>
-    </div>
-    <div style="width:44px"></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 20px 14px">
+    <img src="logo-wide.png" alt="PlusOne" onClick="{{ logoTap }}" style="height:46px;width:auto;display:block;cursor:pointer">
+    <div style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 0 0-16 0"></path></svg></div>
   </div>
-  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:20px;padding:0 0 10px">
-    <div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px">
-      <div style="display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:{{ recKickerColor }};font-weight:600;height:16px">
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 18px 10px">
+    <div style="background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.38);border-radius:24px;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);box-shadow:0 18px 40px rgba(140,20,40,.18);padding:26px 0 18px;display:flex;flex-direction:column;align-items:center;gap:10px">
+      <div style="display:flex;align-items:center;gap:8px;height:36px;padding:0 16px;border-radius:999px;background:#fff;color:#4F3A3E;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">Session with</div>
+      <h1 style="margin:0;font-size:44px;font-weight:700;line-height:1.05">Storm</h1>
+      <div style="display:flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;height:18px;margin-top:6px">
         <span style="{{ recDotStyle }}"></span>{{ recKicker }}
       </div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:68px;line-height:1;font-weight:400;font-variant-numeric:lining-nums tabular-nums;color:var(--color-text)">{{ recTime }}</div>
-    </div>
-    <div style="position:relative;height:190px;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider);background:#fff">
-      <canvas ref="{{ waveRef }}" style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas>
+      <div style="font-size:48px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums">{{ recTime }}</div>
+      <div style="position:relative;width:100%;height:170px;margin-top:6px">
+        <canvas ref="{{ waveRef }}" style="position:absolute;inset:0;width:100%;height:100%;display:block"></canvas>
+      </div>
     </div>
   </div>
   <div style="{{ recFootStyle }}">
     <sc-if value="{{ showRecBtn }}" hint-placeholder-val="{{ true }}">
       <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
-        <button onClick="{{ toggleRec }}" aria-label="{{ recBtnLabel }}" style="width:84px;height:84px;border-radius:50%;border:3px solid #cfc8c8;display:flex;align-items:center;justify-content:center;background:#fff">
+        <button onClick="{{ toggleRec }}" aria-label="{{ recBtnLabel }}" style="width:88px;height:88px;border-radius:50%;border:4px solid #fff;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.18);box-shadow:0 12px 28px rgba(120,10,30,.25)">
           <span style="{{ recInnerStyle }}"></span>
         </button>
-        <div style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--color-text)">{{ recBtnLabel }}</div>
+        <div style="font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase">{{ recBtnLabel }}</div>
       </div>
     </sc-if>
-    <sc-if value="{{ showSend }}" hint-placeholder-val="{{ false }}">
-      <div style="display:flex;flex-direction:column;gap:12px;width:100%">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)">
-          <div><div style="font-size:15px">Optagelse · Storm</div><div style="font-size:12px;color:#6b6565;margin-top:2px;font-variant-numeric:lining-nums tabular-nums">I dag 20:26 · {{ recDur }}</div></div>
-          <button onClick="{{ deleteRec }}" aria-label="Slet" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6b6565" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg></button>
-        </div>
-        <button onClick="{{ sendRec }}" style="height:56px;display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid #E8566A;border-radius:4px;color:#B4304A;font-size:14px;letter-spacing:.2em;text-transform:uppercase;background:#fff" style-active="background:#FBE6E7">
-          <sc-if value="{{ sending }}" hint-placeholder-val="{{ false }}"><span style="width:16px;height:16px;border:2px solid #F4B4BA;border-top-color:#E8566A;border-radius:50%;animation:po-spin .7s linear infinite"></span></sc-if>
-          <sc-if value="{{ notSending }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B4304A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path><path d="m21.854 2.147-10.94 10.939"></path></svg></sc-if>
-          {{ sendLabel }}
-        </button>
-      </div>
-    </sc-if>
-    <sc-if value="{{ isSent }}" hint-placeholder-val="{{ false }}">
-      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:8px 0 4px">
-        <div style="width:56px;height:56px;border-radius:50%;border:1px solid #E8566A;display:flex;align-items:center;justify-content:center"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#E8566A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:26px">Sendt til PlusOne</div>
-        <div style="font-size:13px;color:#6b6565">Optagelsen er krypteret og gemt sikkert.</div>
+    <sc-if value="{{ showSave }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:8px;width:100%">
+        <button onClick="{{ saveRec }}" style="height:58px;width:100%;display:flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;background:#fff;color:#AD1B45;font-size:15px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 12px 28px rgba(120,10,30,.22)" style-active="background:#F3D0D7"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#AD1B45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Save</button>
+        <button onClick="{{ retake }}" style="height:44px;font-size:14px;font-weight:500">Record again</button>
       </div>
     </sc-if>
   </div>
@@ -214,139 +189,134 @@ a{color:#B4304A}a:hover{color:#8f2238}
 </sc-if>
 
 <sc-if value="{{ isLock }}" hint-placeholder-val="{{ false }}">
-<div onClick="{{ lockTap }}" style="position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 0%,#4a2a30 0%,#1f1517 55%,#120d0e 100%);color:#fff;font-family:-apple-system,'SF Pro Display',system-ui,sans-serif;display:flex;flex-direction:column;align-items:center">
+<div onClick="{{ lockTap }}" style="{{ lockBgStyle }}">
   <div style="{{ topPadStyle }}"></div>
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:14px;opacity:.9"><rect width="18" height="11" x="3" y="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-  <div style="margin-top:14px;font-size:20px;font-weight:600;opacity:.92">lørdag 14. november</div>
-  <div style="font-size:100px;font-weight:600;line-height:1;letter-spacing:-.02em;margin-top:2px;font-variant-numeric:lining-nums tabular-nums">{{ lockTime }}</div>
+  <div style="margin-top:12px;font-size:21px;font-weight:600;opacity:.92;text-shadow:0 1px 8px rgba(0,0,0,.15)">Saturday 14 November</div>
+  <div style="font-size:104px;font-weight:600;line-height:1;letter-spacing:-.02em;margin-top:2px;font-variant-numeric:lining-nums tabular-nums;text-shadow:0 2px 16px rgba(0,0,0,.15)">{{ lockTime }}</div>
   <div style="flex:1"></div>
   <div style="{{ notifStyle }}">
-    <div onClick="{{ openNotif }}" style="display:flex;gap:11px;align-items:flex-start;padding:13px 14px;border-radius:22px;background:rgba(255,255,255,.2);-webkit-backdrop-filter:blur(30px) saturate(1.6);backdrop-filter:blur(30px) saturate(1.6);cursor:pointer">
-      <img src="apple-touch-icon.png" alt="" style="width:38px;height:38px;border-radius:9px;flex:none">
+    <div onClick="{{ openNotif }}" style="display:flex;gap:11px;align-items:center;padding:13px 14px;border-radius:22px;background:rgba(255,255,255,.3);-webkit-backdrop-filter:blur(30px) saturate(1.6);backdrop-filter:blur(30px) saturate(1.6);cursor:pointer;color:#111">
+      <img src="logo.png" alt="" style="width:38px;height:38px;border-radius:9px;flex:none;display:block">
       <div style="flex:1;min-width:0">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="font-size:15px;font-weight:600">PlusOne</span><span style="font-size:13px;opacity:.7">nu</span></div>
-        <div style="font-size:15px;line-height:1.3;margin-top:1px">Afsluttet session med PlusOne Kl {{ lockTime }}</div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="font-size:15px;font-weight:600">PlusOne</span><span style="font-size:13px;opacity:.6">now</span></div>
+        <div style="font-size:15px;line-height:1.3;margin-top:1px">Session completed at PlusOne</div>
       </div>
     </div>
   </div>
   <div style="{{ lockFootStyle }}">
-    <div style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.16);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6c0 2-2 2-2 4v10a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V10c0-2-2-2-2-4V2h12z"></path><line x1="6" x2="18" y1="6" y2="6"></line></svg></div>
-    <div style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.16);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg></div>
+    <div style="width:50px;height:50px;border-radius:50%;background:rgba(0,0,0,.22);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6c0 2-2 2-2 4v10a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V10c0-2-2-2-2-4V2h12z"></path><line x1="6" x2="18" y1="6" y2="6"></line></svg></div>
+    <div style="width:50px;height:50px;border-radius:50%;background:rgba(0,0,0,.22);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg></div>
   </div>
 </div>
 </sc-if>
 
 <sc-if value="{{ isRate }}" hint-placeholder-val="{{ false }}">
-<div style="position:absolute;inset:0;display:flex;flex-direction:column;background:var(--color-bg)">
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;background:#FF5757">
   <div style="{{ topPadStyle }}"></div>
-  <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 16px 8px">
-    <button onClick="{{ goLock }}" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#201f1d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
-    <span onClick="{{ heartTap }}" style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;cursor:pointer;padding:8px">PlusOne</span>
-    <div style="width:44px"></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 20px 14px">
+    <img src="logo-wide.png" alt="PlusOne" onClick="{{ logoTap }}" style="height:46px;width:auto;display:block;cursor:pointer">
+    <div style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 0 0-16 0"></path></svg></div>
   </div>
-  <div style="flex:1;overflow-y:auto;padding:4px 22px 0;display:flex;flex-direction:column;gap:16px">
-    <div style="position:relative;width:100%;flex:none;height:42vh;min-height:200px;max-height:380px;border:6px solid var(--color-surface);outline:1px solid var(--color-divider);box-sizing:border-box;background:#f3dcdd;display:flex;align-items:center;justify-content:center;overflow:hidden">
-      <span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#B4304A;text-align:center;padding:20px">Profilbillede af Tess</span>
-      <sc-if value="{{ hasPhoto }}" hint-placeholder-val="{{ false }}"><div role="img" aria-label="Tess" style="{{ photoStyle }}"></div></sc-if>
-    </div>
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px">
-      <div>
-        <h1 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-size:40px;line-height:1">Tess, 27</h1>
-        <div style="margin-top:8px;display:flex;align-items:center;gap:5px;font-size:14px;color:#6b6565"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6b6565" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>København</div>
+  <div style="{{ rateBodyStyle }}">
+    <div style="background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.38);border-radius:24px;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);box-shadow:0 18px 40px rgba(140,20,40,.18);width:100%;box-sizing:border-box;padding:26px 20px 22px;display:flex;flex-direction:column;align-items:center;gap:14px">
+      <div style="position:relative;width:132px;height:132px;border-radius:50%;border:3px solid #fff;box-shadow:0 12px 30px rgba(120,10,30,.25);background:rgba(255,255,255,.25);overflow:hidden;display:flex;align-items:center;justify-content:center;flex:none">
+        <span style="font-size:50px;font-weight:600;color:#fff">T</span>
+        <sc-if value="{{ hasTess }}" hint-placeholder-val="{{ false }}"><div role="img" aria-label="Tess" style="{{ tessStyle }}"></div></sc-if>
       </div>
-      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px">
-        <div style="display:flex;align-items:center;gap:6px">
-          <svg width="30" height="30" viewBox="0 0 24 24"><defs><linearGradient id="po-part" x1="0" x2="1" y1="0" y2="0"><stop offset="0.86" stop-color="#E8566A"></stop><stop offset="0.86" stop-color="#E8566A" stop-opacity="0"></stop></linearGradient></defs><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" fill="url(#po-part)" stroke="#E8566A" stroke-width="1.3" stroke-linejoin="round"></path></svg>
-          <span style="font-family:'Cormorant Garamond',serif;font-size:36px;line-height:1;font-variant-numeric:lining-nums tabular-nums">5,7</span>
-        </div>
-        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#6b6565">ud af 6 · 48 kunder</div>
+      <h1 style="margin:0;font-size:36px;font-weight:700;line-height:1">Tess</h1>
+      <div style="display:flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:999px;background:#fff;color:#4F3A3E;font-size:14px;font-weight:500"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" fill="#F5B301"></path></svg><strong style="font-weight:700">5.7</strong> average rating</div>
+      <div style="width:100%;height:1px;background:rgba(255,255,255,.35);margin:4px 0"></div>
+      <p style="margin:0;max-width:300px;text-align:center;font-size:19px;font-weight:600;line-height:1.35;text-wrap:balance">Your session is now finished - how would you rate your experience?</p>
+      <div style="display:flex;gap:0;justify-content:center">
+        <sc-for list="{{ stars }}" as="s" hint-placeholder-count="6">
+          <button onClick="{{ s.tap }}" aria-label="{{ s.label }}" style="{{ s.style }}">
+            <svg width="42" height="42" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" stroke-width="1.3" stroke-linejoin="round" style="{{ s.pathStyle }}"></path></svg>
+          </button>
+        </sc-for>
       </div>
     </div>
-    <div style="height:1px;background:var(--color-divider)"></div>
-    <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
-      <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
-        <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:24px">Bedøm din oplevelse</div>
-        <div style="display:flex;gap:4px;justify-content:center">
-          <sc-for list="{{ stars }}" as="s" hint-placeholder-count="6">
-            <button onClick="{{ s.tap }}" aria-label="{{ s.label }}" style="{{ s.style }}">
-              <svg width="40" height="40" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" stroke="#E8566A" stroke-width="1.2" stroke-linejoin="round" style="{{ s.pathStyle }}"></path></svg>
-            </button>
-          </sc-for>
+    <sc-if value="{{ bubbleAsk }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;width:100%;max-width:330px;background:#fff;color:#4F3A3E;border-radius:22px;padding:18px 18px 16px;box-sizing:border-box;box-shadow:0 16px 36px rgba(120,10,30,.25);display:flex;flex-direction:column;gap:14px;animation:po-pop .5s cubic-bezier(.2,.9,.3,1.1) both;transform-origin:50% 0">
+        <span style="position:absolute;top:-7px;left:50%;width:14px;height:14px;background:#fff;transform:translateX(-50%) rotate(45deg)"></span>
+        <div style="text-align:center;font-size:16px;font-weight:500;line-height:1.4">Is Tess the type of person you’d see again?</div>
+        <div style="display:flex;gap:10px">
+          <button onClick="{{ answer }}" style="flex:1;height:48px;border:1.5px solid #4F3A3E;border-radius:999px;font-size:15px;font-weight:600;color:#4F3A3E" style-active="background:#F0EAE3">No</button>
+          <button onClick="{{ answer }}" style="flex:1;height:48px;border-radius:999px;font-size:15px;font-weight:600;color:#fff;background:linear-gradient(90deg,#AD1B45,#E83A5C)" style-active="opacity:.85">Yes</button>
         </div>
-        <div style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#B4304A;height:16px">{{ rateLabel }}</div>
       </div>
     </sc-if>
-    <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
-      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 0">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:28px">Tak for din bedømmelse</div>
-        <div style="font-size:13px;color:#6b6565">Du gav Tess {{ rating }} ud af 6 stjerner.</div>
+    <sc-if value="{{ bubbleThanks }}" hint-placeholder-val="{{ false }}">
+      <div style="position:relative;background:#fff;color:#4F3A3E;border-radius:22px;padding:16px 22px;box-shadow:0 16px 36px rgba(120,10,30,.25);display:flex;align-items:center;gap:10px;animation:po-pop .5s cubic-bezier(.2,.9,.3,1.1) both;transform-origin:50% 0">
+        <span style="position:absolute;top:-7px;left:50%;width:14px;height:14px;background:#fff;transform:translateX(-50%) rotate(45deg)"></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#FF5757" style="flex:none"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.740-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+        <span style="font-size:16px;font-weight:500">We hope to have you back soon!</span>
       </div>
-    </sc-if>
-  </div>
-  <div style="{{ rateFootStyle }}">
-    <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
-      <button onClick="{{ submit }}" style="{{ submitStyle }}">Indsend</button>
     </sc-if>
   </div>
 </div>
 </sc-if>
-
 <sc-if value="{{ showStatus }}" hint-placeholder-val="{{ false }}">
   <div style="{{ statusStyle }}">
     <span style="font-weight:600;font-size:16px;font-variant-numeric:lining-nums tabular-nums">{{ clock }}</span>
     <span style="display:flex;align-items:center;gap:6px">
       <svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"></rect><rect x="5" y="5.5" width="3" height="6.5" rx="1"></rect><rect x="10" y="3" width="3" height="9" rx="1"></rect><rect x="15" y="0" width="3" height="12" rx="1"></rect></svg>
-      <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.3c2.2 0 4.2.9 5.7 2.3l1.1-1.1A9.6 9.6 0 0 0 8 .7 9.6 9.6 0 0 0 1.2 3.5l1.1 1.1A8 8 0 0 1 8 2.3Zm0 3.2c1.3 0 2.5.5 3.4 1.3l1.1-1.1A6.4 6.4 0 0 0 8 3.9a6.4 6.4 0 0 0-4.5 1.8l1.1 1.1c.9-.8 2.1-1.3 3.4-1.3Zm0 3.2c-.5 0-1 .2-1.3.5L8 10.5l1.3-1.3c-.3-.3-.8-.5-1.3-.5Z"></path></svg>
-      <span style="width:25px;height:12px;border:1px solid currentColor;border-radius:3.5px;padding:1.5px;box-sizing:border-box;opacity:.95;display:flex"><span style="width:72%;background:currentColor;border-radius:1.5px"></span></span>
+      <span style="width:25px;height:12px;border:1px solid currentColor;border-radius:3.5px;padding:1.5px;box-sizing:border-box;display:flex"><span style="width:72%;background:currentColor;border-radius:1.5px"></span></span>
     </span>
   </div>
 </sc-if>
 
-<div onClick="{{ hotTap }}" style="position:absolute;top:0;left:0;width:70px;height:70px;z-index:40"></div>
+<div onClick="{{ hotTap }}" style="position:absolute;top:0;right:0;width:70px;height:70px;z-index:40"></div>
 
 <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
   <div onClick="{{ closeMenu }}" style="position:absolute;inset:0;z-index:50;background:rgba(20,12,14,.6);display:flex;flex-direction:column;justify-content:flex-end">
     <div onClick="{{ stop }}" style="{{ sheetStyle }}">
-      <div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#6b6565;padding:0 4px 8px">Scenemenu</div>
-      <sc-for list="{{ scenes }}" as="sc" hint-placeholder-count="5">
-        <button onClick="{{ sc.go }}" style="display:flex;align-items:baseline;gap:14px;text-align:left;padding:13px 4px;border-top:1px solid #e2dcdc;min-height:44px;color:#201f1d;background:#ffffff">
-          <span style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#B4304A;width:18px;font-variant-numeric:lining-nums tabular-nums">{{ sc.n }}</span>
+      <div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#6b5357;padding:0 4px 8px">Scenemenu</div>
+      <sc-for list="{{ scenes }}" as="sc" hint-placeholder-count="6">
+        <button onClick="{{ sc.go }}" style="display:flex;align-items:baseline;gap:14px;text-align:left;padding:12px 4px;border-top:1px solid #e6dede;min-height:44px;color:#201f1d;background:#ffffff">
+          <span style="font-weight:600;font-size:22px;color:#AD1B45;width:18px;font-variant-numeric:lining-nums tabular-nums">{{ sc.n }}</span>
           <span style="font-size:15px">{{ sc.label }}</span>
         </button>
       </sc-for>
-      <label style="display:flex;align-items:baseline;gap:14px;padding:13px 4px;border-top:1px solid var(--color-divider);cursor:pointer">
-        <span style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#B4304A;width:18px">+</span>
-        <span style="font-size:15px">Vælg profilbillede af Tess</span>
-        <input type="file" accept="image/*" onChange="{{ onPhoto }}" style="display:none">
-      </label>
-      <div style="display:flex;align-items:center;gap:14px;padding:10px 4px;border-top:1px solid var(--color-divider)">
-        <span style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#B4304A;width:18px">◷</span>
-        <span style="font-size:15px;flex:1">Aktiv session</span>
-        <input value="{{ elapsedInput }}" onChange="{{ onElapsed }}" inputmode="numeric" placeholder="00:09:57" style="width:96px;height:40px;border:1px solid var(--color-divider);border-radius:4px;background:#fff;text-align:center;font:inherit;font-size:16px;font-variant-numeric:tabular-nums;color:var(--color-text)">
-        <button onClick="{{ setElapsed }}" style="height:40px;padding:0 14px;border:1px solid #E8566A;border-radius:4px;color:#B4304A;font-size:12px;letter-spacing:.14em;text-transform:uppercase">Sæt</button>
+      <sc-for list="{{ pickers }}" as="pk" hint-placeholder-count="3">
+        <label style="display:flex;align-items:baseline;gap:14px;padding:12px 4px;border-top:1px solid #e6dede;cursor:pointer;color:#201f1d">
+          <span style="font-weight:600;font-size:22px;color:#AD1B45;width:18px">+</span>
+          <span style="font-size:15px">{{ pk.label }}</span>
+          <input type="file" accept="image/*" onChange="{{ pk.onPick }}" style="display:none">
+        </label>
+      </sc-for>
+      <div style="display:flex;align-items:center;gap:14px;padding:10px 4px;border-top:1px solid #e6dede;color:#201f1d">
+        <span style="font-weight:600;font-size:22px;color:#AD1B45;width:18px">◷</span>
+        <span style="font-size:15px;flex:1">Tid i aktiv session</span>
+        <input value="{{ elapsedInput }}" onChange="{{ onElapsed }}" inputmode="numeric" placeholder="00:09:57" style="width:96px;height:40px;border:1px solid #e6dede;border-radius:4px;background:#fff;text-align:center;font:inherit;font-size:16px;font-variant-numeric:tabular-nums;color:#201f1d">
+        <button onClick="{{ setElapsed }}" style="height:40px;padding:0 14px;border:1px solid #AD1B45;border-radius:4px;color:#AD1B45;font-size:12px;letter-spacing:.14em;text-transform:uppercase">Sæt</button>
       </div>
-      <div style="padding:12px 4px 6px;border-top:1px solid #e2dcdc;display:flex;flex-direction:column;gap:8px">
-        <div style="display:flex;align-items:baseline;gap:14px"><span style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#B4304A;width:18px">✉</span><span style="font-size:15px">Beskeder</span></div>
+      <button onClick="{{ toggleTimer }}" style="display:flex;align-items:baseline;gap:14px;text-align:left;padding:12px 4px;border-top:1px solid #e6dede;min-height:44px;color:#201f1d">
+        <span style="font-weight:600;font-size:22px;color:#AD1B45;width:18px">◦</span>
+        <span style="font-size:15px">{{ timerLabel }}</span>
+      </button>
+      <div style="padding:12px 4px 6px;border-top:1px solid #e6dede;display:flex;flex-direction:column;gap:8px;color:#201f1d">
+        <div style="display:flex;align-items:baseline;gap:14px"><span style="font-weight:600;font-size:22px;color:#AD1B45;width:18px">✉</span><span style="font-size:15px">Beskeder</span></div>
         <sc-for list="{{ msgs }}" as="m" hint-placeholder-count="3">
           <div style="display:flex;align-items:center;gap:10px;padding-left:32px">
-            <div style="flex:1;min-width:0;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#201f1d"><strong style="font-weight:600">{{ m.name }}</strong> · {{ m.text }}</div>
+            <div style="flex:1;min-width:0;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><strong style="font-weight:600">{{ m.name }}</strong> · {{ m.text }}</div>
             <button onClick="{{ m.toggle }}" aria-label="Ulæst" style="{{ m.toggleStyle }}">●</button>
-            <button onClick="{{ m.remove }}" aria-label="Slet" style="width:36px;height:36px;flex:none;display:flex;align-items:center;justify-content:center;color:#6b6565;font-size:18px">✕</button>
+            <button onClick="{{ m.remove }}" aria-label="Slet" style="width:36px;height:36px;flex:none;display:flex;align-items:center;justify-content:center;color:#6b5357;font-size:18px">✕</button>
           </div>
         </sc-for>
         <div style="display:flex;flex-direction:column;gap:6px;padding-left:32px">
           <div style="display:flex;gap:6px">
-            <input value="{{ newName }}" onChange="{{ onNewName }}" placeholder="Navn" style="flex:1;min-width:0;height:40px;border:1px solid #e2dcdc;border-radius:4px;background:#fff;padding:0 10px;font:inherit;font-size:16px;color:#201f1d">
-            <input value="{{ newTime }}" onChange="{{ onNewTime }}" placeholder="Tid" style="width:76px;height:40px;border:1px solid #e2dcdc;border-radius:4px;background:#fff;padding:0 10px;font:inherit;font-size:16px;color:#201f1d">
+            <input value="{{ newName }}" onChange="{{ onNewName }}" placeholder="Navn" style="flex:1;min-width:0;height:40px;border:1px solid #e6dede;border-radius:4px;background:#fff;padding:0 10px;font:inherit;font-size:16px;color:#201f1d">
+            <input value="{{ newTime }}" onChange="{{ onNewTime }}" placeholder="Tid" style="width:76px;height:40px;border:1px solid #e6dede;border-radius:4px;background:#fff;padding:0 10px;font:inherit;font-size:16px;color:#201f1d">
           </div>
           <div style="display:flex;gap:6px">
-            <input value="{{ newText }}" onChange="{{ onNewText }}" placeholder="Besked" style="flex:1;min-width:0;height:40px;border:1px solid #e2dcdc;border-radius:4px;background:#fff;padding:0 10px;font:inherit;font-size:16px;color:#201f1d">
-            <button onClick="{{ addMsg }}" style="height:40px;padding:0 14px;border:1px solid #E8566A;border-radius:4px;color:#B4304A;font-size:12px;letter-spacing:.14em;text-transform:uppercase">Tilføj</button>
+            <input value="{{ newText }}" onChange="{{ onNewText }}" placeholder="Besked" style="flex:1;min-width:0;height:40px;border:1px solid #e6dede;border-radius:4px;background:#fff;padding:0 10px;font:inherit;font-size:16px;color:#201f1d">
+            <button onClick="{{ addMsg }}" style="height:40px;padding:0 14px;border:1px solid #AD1B45;border-radius:4px;color:#AD1B45;font-size:12px;letter-spacing:.14em;text-transform:uppercase">Tilføj</button>
           </div>
         </div>
       </div>
-      <button onClick="{{ testMic }}" style="display:flex;align-items:baseline;gap:14px;text-align:left;padding:13px 4px;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider);min-height:44px">
-        <span style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#B4304A;width:18px">◦</span>
+      <button onClick="{{ testMic }}" style="display:flex;align-items:baseline;gap:14px;text-align:left;padding:12px 4px;border-top:1px solid #e6dede;border-bottom:1px solid #e6dede;min-height:44px;color:#201f1d">
+        <span style="font-weight:600;font-size:22px;color:#AD1B45;width:18px">◦</span>
         <span style="font-size:15px">{{ micLabel }}</span>
       </button>
     </div>
@@ -355,41 +325,48 @@ a{color:#B4304A}a:hover{color:#8f2238}
 
 </div>
 <sc-if value="{{ wide }}" hint-placeholder-val="{{ false }}">
-  <div style="max-width:260px;display:flex;flex-direction:column;gap:12px;color:var(--color-text)">
-    <div style="font-family:'Cormorant Garamond',serif;font-size:34px;line-height:1.05">PlusOne</div>
-    <div style="height:1px;background:var(--color-divider)"></div>
-    <p style="margin:0;font-size:14px;line-height:1.6;color:#4a4545">Åbn siden i Safari på iPhone, tryk Del → <em>Føj til hjemmeskærm</em>.</p>
-    <p style="margin:0;font-size:14px;line-height:1.6;color:#4a4545">Tryk tre gange i øverste venstre hjørne af appen for at åbne scenemenuen.</p>
+  <div style="max-width:260px;display:flex;flex-direction:column;gap:12px;color:#4F3A3E">
+    <img src="logo-wide.png" alt="PlusOne" style="width:140px;height:auto;display:block">
+    <div style="height:1px;background:rgba(79,58,62,.15)"></div>
+    <p style="margin:0;font-size:14px;line-height:1.6">Åbn siden i Safari på iPhone, tryk Del → <em>Føj til hjemmeskærm</em>.</p>
+    <p style="margin:0;font-size:14px;line-height:1.6">Dobbelttap på logoet for at åbne scenemenuen.</p>
   </div>
 </sc-if>
 </div>
-
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;startScreen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;record&quot;,&quot;lock&quot;,&quot;rate&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;splashSeconds&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0.5,&quot;max&quot;:6,&quot;step&quot;:0.5,&quot;unit&quot;:&quot;s&quot;,&quot;default&quot;:5,&quot;tsType&quot;:&quot;number&quot;},&quot;notifDelay&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:20,&quot;step&quot;:1,&quot;unit&quot;:&quot;s&quot;,&quot;default&quot;:4,&quot;tsType&quot;:&quot;number&quot;},&quot;sound&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;lockTime&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;01:47&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;startScreen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;record&quot;,&quot;lock&quot;,&quot;rate&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;splashSeconds&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0.5,&quot;max&quot;:8,&quot;step&quot;:0.5,&quot;unit&quot;:&quot;s&quot;,&quot;default&quot;:5,&quot;tsType&quot;:&quot;number&quot;},&quot;notifDelay&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:0,&quot;max&quot;:20,&quot;step&quot;:1,&quot;unit&quot;:&quot;s&quot;,&quot;default&quot;:4,&quot;tsType&quot;:&quot;number&quot;},&quot;sound&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;lockTime&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;01:47&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { screen: 'splash', tab: 'home', rec: 'idle', recMs: 0, now: Date.now(), starsIn: false, rating: 0, submitted: false, notif: false, menu: false, photo: null, photoErr: false, mic: false, elapsedInput: '', msgs: null, newName: '', newTime: '', newText: '' };
+  state = { screen: 'splash', tab: 'home', active: false, showTimer: true, rec: 'idle', recMs: 0, now: Date.now(), starsIn: false, rating: 0, bubble: 0, notif: false, menu: false, photo: {}, ok: {}, mic: false, elapsedInput: '', msgs: null, newName: '', newTime: '', newText: '' };
   defaultMsgs = [
-    { name: 'PlusOne', time: '20:16', text: 'Din session med Storm er startet. Husk samtykke før optagelse.', unread: true },
-    { name: 'Storm', time: '13:42', text: 'Vi ses kl. 14. Jeg står ved indgangen.', unread: true },
-    { name: 'Maja', time: '13:05', text: 'Skriv når du er hjemme ❤︎', unread: false },
-    { name: 'Frederik', time: 'I går', text: 'Tusind tak for i aftes. Mine forældre var vilde med dig.', unread: false },
-    { name: 'PlusOne', time: 'I går', text: 'Ny booking: Gallaaften onsdag 18:30–01:00.', unread: false },
-    { name: 'Jonas', time: 'Tor.', text: 'Er du ledig til et bryllup i december?', unread: false },
-    { name: 'PlusOne', time: 'Man.', text: 'Du har fået en ny bedømmelse: 6 ud af 6.', unread: false },
+    { name: 'PlusOne', time: '14:30', text: 'Your session with Storm starts at 15:00. Remember to record consent.', unread: true },
+    { name: 'Storm', time: '13:42', text: 'See you at 3. I’ll be waiting by the entrance.', unread: true },
+    { name: 'Maja', time: '13:05', text: 'Text me when you’re home ❤︎', unread: false },
+    { name: 'Frederik', time: 'Yesterday', text: 'Thank you for last night. My parents loved you.', unread: false },
+    { name: 'PlusOne', time: 'Yesterday', text: 'New booking: Gala evening, Wednesday 18:30 – 01:00.', unread: false },
+    { name: 'Jonas', time: 'Thu', text: 'Are you free for a wedding in December?', unread: false },
   ];
-  saveMsgs(list) { this.setState({ msgs: list }); try { localStorage.setItem('plusone-msgs', JSON.stringify(list)); } catch (e) {} }
-  sessionStart = Date.now() - 597000;
-  hist = [];
-  timers = [];
+  photoDefaults = { storm: 'storm.jpg', tess: 'tess.jpg', wall: 'wallpaper.jpg' };
+  offset = 0;
+  sessionStart = Date.now();
+  hist = []; timers = [];
   lastTap = 0; taps = 0; lvl = 0;
   waveRef = (el) => { this.cv = el; if (el) this.draw(); };
 
   componentDidMount() {
-    let p = null;
-    try { p = localStorage.getItem('plusone-photo'); if (p) this.setState({ photo: p }); } catch (e) {}
-    this.probe(p || 'tess.jpg');
-    try { const m = JSON.parse(localStorage.getItem('plusone-msgs')); if (Array.isArray(m)) this.setState({ msgs: m }); } catch (e) {}
-    try { const st = Number(localStorage.getItem('plusone-session-start')); if (st) this.sessionStart = st; } catch (e) {}
+    const ls = (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+    const photo = {};
+    Object.keys(this.photoDefaults).forEach((k) => {
+      const v = ls('plusone-photo-' + k) || (k === 'tess' ? ls('plusone-photo') : null);
+      if (v) photo[k] = v;
+      this.probe(k, v || this.photoDefaults[k]);
+    });
+    this.setState({ photo });
+    try { const m = JSON.parse(ls('plusone-msgs-en')); if (Array.isArray(m)) this.setState({ msgs: m }); } catch (e) {}
+    this.offset = Number(ls('plusone-offset')) || 0;
+    const st = Number(ls('plusone-session-start'));
+    if (st) this.sessionStart = st;
+    if (ls('plusone-active') === '1') this.setState({ active: true });
+    if (ls('plusone-timer') === '0') this.setState({ showTimer: false });
     this.tick = setInterval(() => this.setState({ now: Date.now() }), 500);
     this.onResize = () => this.forceUpdate();
     window.addEventListener('resize', this.onResize);
@@ -400,9 +377,15 @@ class Component extends DCLogic {
     clearInterval(this.tick); this.clearT(); cancelAnimationFrame(this.raf);
     window.removeEventListener('resize', this.onResize);
   }
-  probe(src) { const i = new Image(); i.onload = () => this.setState({ photoOk: true }); i.onerror = () => this.setState({ photoOk: false }); i.src = src; }
+  store(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  probe(k, src) { const i = new Image(); i.onload = () => this.setState((s) => ({ ok: { ...s.ok, [k]: true } })); i.onerror = () => this.setState((s) => ({ ok: { ...s.ok, [k]: false } })); i.src = src; }
   clearT() { this.timers.forEach(clearTimeout); this.timers = []; }
   later(fn, ms) { this.timers.push(setTimeout(fn, ms)); }
+  setActive(on) {
+    if (on) { this.sessionStart = Date.now() - this.offset * 1000; this.store('plusone-session-start', String(this.sessionStart)); }
+    this.store('plusone-active', on ? '1' : '0');
+    this.setState({ active: on, now: Date.now() });
+  }
 
   go(screen) {
     this.clearT();
@@ -418,8 +401,8 @@ class Component extends DCLogic {
       this.setState({ notif: false });
       this.later(() => { this.setState({ notif: true }); if (this.props.sound !== false) this.ding(); }, (this.props.notifDelay ?? 4) * 1000);
     } else if (screen === 'rate') {
-      this.setState({ starsIn: false, rating: 0, submitted: false });
-      this.later(() => this.setState({ starsIn: true }), 900);
+      this.setState({ starsIn: false, rating: 0, bubble: 0 });
+      this.later(() => this.setState({ starsIn: true }), 700);
     }
   }
 
@@ -444,7 +427,7 @@ class Component extends DCLogic {
     return navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: true } }).then((st) => {
       this.stream = st; this.ensureAC();
       const src = this.ac.createMediaStreamSource(st);
-      this.an = this.ac.createAnalyser(); this.an.fftSize = 1024; this.an.smoothingTimeConstant = 0.3;
+      this.an = this.ac.createAnalyser(); this.an.fftSize = 1024; this.an.smoothingTimeConstant = 0.2;
       src.connect(this.an); this.buf = new Uint8Array(this.an.fftSize);
       this.setState({ mic: true });
     }).catch(() => {});
@@ -455,7 +438,7 @@ class Component extends DCLogic {
       this.an.getByteTimeDomainData(this.buf);
       let s = 0; for (let i = 0; i < this.buf.length; i++) { const v = (this.buf[i] - 128) / 128; s += v * v; }
       const rms = Math.sqrt(s / this.buf.length);
-      return Math.min(1, Math.max(0.03, rms * 5.5));
+      return Math.min(1, Math.max(0.025, Math.pow(rms * 9, 0.65)));
     }
     const env = (Math.sin(t * 1.3) + Math.sin(t * 2.7 + 1)) * 0.25 + 0.5;
     const talking = Math.sin(t * 0.8) + Math.sin(t * 0.33) > -0.6;
@@ -468,8 +451,8 @@ class Component extends DCLogic {
     if (this.state.rec === 'recording') {
       const now = performance.now();
       const l = this.level(now / 1000);
-      this.lvl = this.lvl * 0.45 + l * 0.55;
-      if (!this.lastPush || now - this.lastPush > 45) { this.hist.push(this.lvl); this.lastPush = now; if (this.hist.length > 600) this.hist.shift(); }
+      this.lvl = this.lvl * 0.3 + l * 0.7;
+      if (!this.lastPush || now - this.lastPush > 38) { this.hist.push(this.lvl); this.lastPush = now; if (this.hist.length > 600) this.hist.shift(); }
       const ms = now - this.recStart;
       if (Math.floor(ms / 100) !== Math.floor(this.state.recMs / 100)) this.setState({ recMs: ms });
     }
@@ -482,22 +465,21 @@ class Component extends DCLogic {
     if (!w || !h) return;
     if (c.width !== w * dpr || c.height !== h * dpr) { c.width = w * dpr; c.height = h * dpr; }
     const x = c.getContext('2d'); x.setTransform(dpr, 0, 0, dpr, 0, 0); x.clearRect(0, 0, w, h);
-    const mid = h / 2, play = this.state.rec === 'idle' ? w * 0.5 : w * 0.62, step = 5, bw = 2.6;
-    x.fillStyle = '#cfc8c8';
+    const mid = h / 2, play = this.state.rec === 'idle' ? w * 0.5 : w * 0.66, step = 5, bw = 3;
+    x.fillStyle = 'rgba(255,255,255,.4)';
     for (let px = play + 8; px < w; px += 9) x.fillRect(px, mid - 0.75, 2, 1.5);
     const n = this.hist.length;
-    x.fillStyle = '#E8566A';
+    x.fillStyle = '#fff';
     for (let k = 0; k < n; k++) {
       const px = play - (n - 1 - k) * step - bw;
       if (px < -step) continue;
-      const bh = Math.max(2, this.hist[k] * (h - 30));
-      const r = Math.min(bw / 2, bh / 2);
+      const bh = Math.max(2, this.hist[k] * (h - 24));
       x.beginPath();
-      if (x.roundRect) x.roundRect(px, mid - bh / 2, bw, bh, r); else x.rect(px, mid - bh / 2, bw, bh);
+      if (x.roundRect) x.roundRect(px, mid - bh / 2, bw, bh, Math.min(bw / 2, bh / 2)); else x.rect(px, mid - bh / 2, bw, bh);
       x.fill();
     }
-    if (!n) { x.fillStyle = '#cfc8c8'; for (let px = play - 9; px > 0; px -= 9) x.fillRect(px, mid - 0.75, 2, 1.5); }
-    x.fillStyle = '#B4304A';
+    if (!n) { x.fillStyle = 'rgba(255,255,255,.4)'; for (let px = play - 9; px > 0; px -= 9) x.fillRect(px, mid - 0.75, 2, 1.5); }
+    x.fillStyle = '#AD1B45';
     x.fillRect(play - 0.75, 6, 1.5, h - 12);
     x.beginPath(); x.arc(play, 6, 4, 0, Math.PI * 2); x.fill();
     x.beginPath(); x.arc(play, h - 6, 4, 0, Math.PI * 2); x.fill();
@@ -505,100 +487,122 @@ class Component extends DCLogic {
 
   fmtRec(ms) {
     const s = Math.floor(ms / 1000), m = Math.floor(s / 60), d = Math.floor((ms % 1000) / 100);
-    return String(m).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0') + ',' + d;
+    return String(m).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0') + '.' + d;
   }
+  bgImg(k, pos) {
+    const src = this.state.photo[k] || this.photoDefaults[k];
+    return { position: 'absolute', inset: 0, backgroundImage: `url("${src}")`, backgroundSize: 'cover', backgroundPosition: pos || 'center top' };
+  }
+  picker(k) {
+    return (e) => {
+      const f = e.target.files && e.target.files[0]; if (!f) return;
+      const r = new FileReader();
+      r.onload = () => {
+        const img = new Image();
+        img.onload = () => {
+          const lim = k === 'wall' ? 1400 : 700;
+          const q = Math.min(1, lim / Math.max(img.width, img.height));
+          const cv = document.createElement('canvas'); cv.width = img.width * q; cv.height = img.height * q;
+          cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+          const url = cv.toDataURL('image/jpeg', 0.85);
+          this.store('plusone-photo-' + k, url);
+          this.setState((s) => ({ photo: { ...s.photo, [k]: url }, ok: { ...s.ok, [k]: true }, menu: false }));
+        };
+        img.src = r.result;
+      };
+      r.readAsDataURL(f);
+    };
+  }
+  saveMsgs(list) { this.setState({ msgs: list }); this.store('plusone-msgs-en', JSON.stringify(list)); }
 
   renderVals() {
     const s = this.state, p = this.props;
     const W = window.innerWidth, H = window.innerHeight;
     const wide = W >= 640;
     const sc = Math.min(1, (H - 48) / 844);
-    const standalone = !!(navigator.standalone || (window.matchMedia && matchMedia('(display-mode: standalone)').matches));
-    const dark = s.screen === 'splash' || s.screen === 'lock';
     const top = wide ? '54px' : 'calc(env(safe-area-inset-top, 0px) + 6px)';
     const bot = wide ? '28px' : 'max(env(safe-area-inset-bottom, 0px), 14px)';
-    const coral = '#E8566A', mute = '#8a8383';
-    const sess = Math.floor((s.now - this.sessionStart) / 1000);
+    const sess = Math.max(0, Math.floor((s.now - this.sessionStart) / 1000));
     const hh = String(Math.floor(sess / 3600)).padStart(2, '0'), mm = String(Math.floor(sess / 60) % 60).padStart(2, '0'), ss = String(sess % 60).padStart(2, '0');
     const d = new Date(s.now);
     const recording = s.rec === 'recording';
-    const labels = ['', 'Skuffende', 'Under middel', 'Okay', 'God', 'Rigtig god', 'Fremragende'];
+    const tabStyle = (on) => ({ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, paddingTop: 9, fontSize: 10, minHeight: 44, color: on ? '#fff' : 'rgba(255,255,255,.62)', fontWeight: on ? 600 : 500 });
     const stars = [0, 1, 2, 3, 4, 5].map((i) => ({
-      label: (i + 1) + ' stjerner',
-      tap: () => this.setState({ rating: i + 1 }),
-      style: { width: 48, height: 52, display: 'flex', alignItems: 'center', justifyContent: 'center', transform: s.starsIn ? 'scale(1)' : 'scale(0.2)', opacity: s.starsIn ? 1 : 0, transition: `transform .55s cubic-bezier(.3,1.7,.5,1) ${i * 110}ms, opacity .3s ${i * 110}ms` },
-      pathStyle: { fill: i < s.rating ? coral : 'rgba(232,86,106,0)', transition: `fill .25s ease ${i < s.rating ? i * 70 : 0}ms` },
+      label: (i + 1) + ' stars',
+      tap: () => {
+        this.setState({ rating: i + 1 });
+        if (!s.bubble) { this.clearT(); this.later(() => this.setState({ bubble: 1 }), 900); }
+      },
+      style: { width: 50, height: 54, display: 'flex', alignItems: 'center', justifyContent: 'center', transform: s.starsIn ? 'scale(1)' : 'scale(0.2)', opacity: s.starsIn ? 1 : 0, transition: `transform .55s cubic-bezier(.3,1.7,.5,1) ${i * 110}ms, opacity .3s ${i * 110}ms` },
+      pathStyle: { fill: i < s.rating ? '#FFC93C' : 'rgba(255,255,255,.18)', stroke: i < s.rating ? '#FFC93C' : '#fff', transition: `fill .25s ease ${i < s.rating ? i * 70 : 0}ms` },
     }));
     const tab = (t) => () => this.go(t);
+    const wallOk = s.ok.wall;
     return {
       wide,
       frameStyle: wide
-        ? { position: 'relative', width: 390, height: 844, borderRadius: 52, overflow: 'hidden', background: 'var(--color-bg)', boxShadow: '0 0 0 11px #1d1a1a, 0 0 0 12px #3a3434, 0 40px 90px rgba(70,30,35,.28)', flex: 'none', zoom: sc }
-        : { position: 'relative', width: '100%', height: '100%', overflow: 'hidden', background: 'var(--color-bg)' },
+        ? { position: 'relative', width: 390, height: 844, borderRadius: 52, overflow: 'hidden', background: '#FF5757', boxShadow: '0 0 0 11px #1d1a1a, 0 0 0 12px #3a3434, 0 40px 90px rgba(70,30,35,.28)', flex: 'none', zoom: sc }
+        : { position: 'relative', width: '100%', height: '100%', overflow: 'hidden', background: '#FF5757' },
       topPadStyle: { height: top, flex: 'none' },
-      tabBarStyle: { display: 'flex', borderTop: '1px solid var(--color-divider)', background: 'var(--color-bg)', paddingBottom: bot, flex: 'none' },
+      tabBarStyle: { display: 'flex', borderTop: '1px solid rgba(255,255,255,.35)', background: 'rgba(255,255,255,.14)', WebkitBackdropFilter: 'blur(18px)', backdropFilter: 'blur(18px)', paddingBottom: bot, flex: 'none' },
+      tb: { home: tabStyle(s.tab === 'home'), appts: tabStyle(s.tab === 'appts'), profile: tabStyle(s.tab === 'profile'), msgs: tabStyle(s.tab === 'msgs'), safety: tabStyle(s.tab === 'safety') },
       recFootStyle: { padding: `0 22px ${bot}`, minHeight: 150, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', flex: 'none', paddingTop: 8, boxSizing: 'border-box' },
-      rateFootStyle: { padding: `14px 22px ${bot}`, flex: 'none' },
+      rateBodyStyle: { flex: 1, overflowY: 'auto', padding: `4px 22px ${bot}`, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 },
+      lockBgStyle: wallOk
+        ? { position: 'absolute', inset: 0, backgroundImage: `url("${s.photo.wall || 'wallpaper.jpg'}")`, backgroundSize: 'cover', backgroundPosition: 'center', color: '#fff', fontFamily: "-apple-system,'SF Pro Display',system-ui,sans-serif", display: 'flex', flexDirection: 'column', alignItems: 'center' }
+        : { position: 'absolute', inset: 0, background: 'radial-gradient(90% 60% at 15% 15%, #6f8cff 0%, rgba(111,140,255,0) 60%), radial-gradient(80% 55% at 95% 45%, #ff9a6b 0%, rgba(255,154,107,0) 60%), radial-gradient(110% 70% at 40% 100%, #1d2f8a 0%, rgba(29,47,138,0) 70%), linear-gradient(180deg, #3b55d9 0%, #6a3fb8 55%, #1b2366 100%)', color: '#fff', fontFamily: "-apple-system,'SF Pro Display',system-ui,sans-serif", display: 'flex', flexDirection: 'column', alignItems: 'center' },
       lockFootStyle: { width: '100%', boxSizing: 'border-box', display: 'flex', justifyContent: 'space-between', padding: `0 46px ${wide ? '40px' : 'calc(max(env(safe-area-inset-bottom, 0px), 14px) + 22px)'}` },
       sheetStyle: { background: '#ffffff', color: '#201f1d', boxShadow: '0 -10px 40px rgba(0,0,0,.25)', position: 'relative', zIndex: 2, borderRadius: '14px 14px 0 0', padding: `20px 20px ${bot}`, display: 'flex', flexDirection: 'column', maxHeight: '88%', overflowY: 'auto', WebkitOverflowScrolling: 'touch', boxSizing: 'border-box' },
-      statusStyle: { position: 'absolute', top: 0, left: 0, right: 0, height: wide ? 54 : 'env(safe-area-inset-top, 0px)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: wide ? '6px 30px 0 46px' : '4px 26px 0 34px', boxSizing: 'border-box', color: dark ? '#fff' : '#111', fontFamily: "-apple-system,'SF Pro Text',system-ui,sans-serif", zIndex: 30, pointerEvents: 'none' },
-      showStatus: wide && s.screen !== 'lock',
+      statusStyle: { position: 'absolute', top: 0, left: 0, right: 0, height: 54, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 30px 0 46px', boxSizing: 'border-box', color: s.screen === 'lock' ? '#fff' : '#111', fontFamily: "-apple-system,'SF Pro Text',system-ui,sans-serif", zIndex: 30, pointerEvents: 'none' },
+      showStatus: wide,
       clock: String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'),
 
-      splashFootStyle: { position: 'absolute', left: 0, right: 0, bottom: wide ? 56 : 'calc(max(env(safe-area-inset-bottom, 0px), 14px) + 36px)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18 },
+      splashFootStyle: { position: 'absolute', left: 0, right: 0, bottom: wide ? 64 : 'calc(max(env(safe-area-inset-bottom, 0px), 14px) + 44px)', display: 'flex', justifyContent: 'center' },
       loadBar: React.createElement('div', { key: 'lb' + this.splashKey, style: { width: '100%', height: '100%', background: '#fff', transformOrigin: 'left', animation: `po-load ${p.splashSeconds ?? 5}s cubic-bezier(.4,.1,.3,1) forwards` } }),
       isSplash: s.screen === 'splash', isApp: s.screen === 'app', isRecord: s.screen === 'record', isLock: s.screen === 'lock', isRate: s.screen === 'rate',
       tabHome: s.tab === 'home', tabAppts: s.tab === 'appts', tabMsgs: s.tab === 'msgs', tabProfile: s.tab === 'profile', tabSafety: s.tab === 'safety',
-      c: { home: s.tab === 'home' ? coral : mute, appts: s.tab === 'appts' ? coral : mute, msgs: s.tab === 'msgs' ? coral : mute, profile: s.tab === 'profile' ? coral : mute, safety: s.tab === 'safety' ? coral : mute },
       tabHomeGo: tab('home'), tabApptsGo: tab('appts'), tabMsgsGo: tab('msgs'), tabProfileGo: tab('profile'), tabSafetyGo: tab('safety'),
+      isActive: s.active, notActive: !s.active, showTimer: s.showTimer, timerOn: s.active && s.showTimer,
       sessionTime: `${hh}:${mm}:${ss}`,
-      goRecord: () => this.go('record'), goHome: () => this.go('home'), goLock: () => this.go('lock'),
+      goRecord: () => this.go('record'),
+
+      hasStorm: s.ok.storm, stormStyle: this.bgImg('storm'),
+      hasTess: s.ok.tess, tessStyle: this.bgImg('tess'),
 
       waveRef: this.waveRef,
       recTime: this.fmtRec(s.recMs),
-      recDur: this.fmtRec(s.recMs).slice(0, 5),
-      recKicker: recording ? 'Optager' : s.rec === 'idle' ? 'Klar til optagelse' : 'Optagelse stoppet',
-      recKickerColor: recording ? '#B4304A' : '#6b6565',
-      recDotStyle: { width: 8, height: 8, borderRadius: '50%', background: recording ? coral : '#cfc8c8', animation: recording ? 'po-pulse 1s ease-in-out infinite' : 'none' },
+      recKicker: recording ? 'Recording' : s.rec === 'idle' ? 'Ready to record' : 'Recording stopped',
+            recDotStyle: { width: 8, height: 8, borderRadius: '50%', background: recording ? '#fff' : 'rgba(255,255,255,.45)', animation: recording ? 'po-pulse 1s ease-in-out infinite' : 'none' },
       showRecBtn: s.rec === 'idle' || recording,
-      recBtnLabel: recording ? 'Stop optagelse' : 'Optag',
+      recBtnLabel: recording ? 'Stop' : 'Start',
       recInnerStyle: recording
-        ? { width: 30, height: 30, borderRadius: 6, background: coral, transition: 'all .25s ease' }
-        : { width: 64, height: 64, borderRadius: 32, background: coral, transition: 'all .25s ease' },
+        ? { width: 30, height: 30, borderRadius: 7, background: '#fff', transition: 'all .25s ease' }
+        : { width: 66, height: 66, borderRadius: 33, background: '#fff', transition: 'all .25s ease' },
       toggleRec: () => {
         if (s.rec === 'idle') {
           this.ensureAC(); this.hist = []; this.lvl = 0; this.recStart = performance.now();
           this.setState({ rec: 'recording', recMs: 0 }); this.getMic();
-        } else if (s.rec === 'recording') {
+        } else if (recording) {
           this.setState({ rec: 'stopped', recMs: performance.now() - this.recStart });
         }
       },
-      showSend: s.rec === 'stopped' || s.rec === 'sending',
-      sending: s.rec === 'sending', notSending: s.rec !== 'sending',
-      sendLabel: s.rec === 'sending' ? 'Sender' : 'Send',
-      sendRec: () => { if (s.rec !== 'stopped') return; this.setState({ rec: 'sending' }); this.later(() => this.setState({ rec: 'sent' }), 1200); },
-      deleteRec: () => { this.hist = []; this.setState({ rec: 'idle', recMs: 0 }); },
-      isSent: s.rec === 'sent',
+      showSave: s.rec === 'stopped',
+      saveRec: () => { this.setActive(true); this.go('home'); },
+      retake: () => { this.hist = []; this.setState({ rec: 'idle', recMs: 0 }); },
 
       lockTime: p.lockTime || '01:47',
       notifStyle: { width: '100%', boxSizing: 'border-box', padding: '0 10px 26px', transform: s.notif ? 'translateY(0) scale(1)' : 'translateY(40px) scale(.96)', opacity: s.notif ? 1 : 0, transition: 'transform .5s cubic-bezier(.2,.9,.3,1.1), opacity .35s ease' },
       openNotif: (e) => { e.stopPropagation(); if (s.notif) this.go('rate'); },
       lockTap: () => { if (!s.notif) { this.clearT(); this.setState({ notif: true }); if (p.sound !== false) this.ding(); } },
 
-      photoSrc: s.photo || 'tess.jpg',
-      hasPhoto: s.photoOk,
-      photoStyle: { position: 'absolute', inset: 0, backgroundImage: `url("${s.photo || 'tess.jpg'}")`, backgroundSize: 'cover', backgroundPosition: 'center top' },
       stars,
-      rating: s.rating,
-      rateLabel: labels[s.rating],
-      notSubmitted: !s.submitted, submitted: s.submitted,
-      submitStyle: { width: '100%', height: 56, border: '1px solid ' + coral, borderRadius: 4, color: '#B4304A', fontSize: 14, letterSpacing: '.2em', textTransform: 'uppercase', background: s.rating ? '#fff' : 'transparent', opacity: s.rating ? 1 : 0.45, transition: 'opacity .3s' },
-      submit: () => { if (s.rating) this.setState({ submitted: true }); },
+      bubbleAsk: s.bubble === 1, bubbleThanks: s.bubble === 2,
+      answer: () => this.setState({ bubble: 2 }),
 
       unlock: () => this.ensureAC(),
-      heartTap: () => {
+      logoTap: () => {
         const t = Date.now();
-        if (t - (this.lastHeart || 0) < 400) { this.lastHeart = 0; this.setState({ menu: true }); } else this.lastHeart = t;
+        if (t - (this.lastLogo || 0) < 450) { this.lastLogo = 0; this.clearT(); this.setState({ menu: true }); } else this.lastLogo = t;
       },
       hotTap: () => {
         const t = Date.now(); this.taps = t - this.lastTap < 550 ? this.taps + 1 : 1; this.lastTap = t;
@@ -608,20 +612,40 @@ class Component extends DCLogic {
       closeMenu: () => this.setState({ menu: false }),
       stop: (e) => e.stopPropagation(),
       scenes: [
-        { n: '1', label: 'Åbningsskærm', go: () => this.go('splash') },
-        { n: '2', label: 'Tess · Hjem med aktiv session', go: () => this.go('home') },
-        { n: '3', label: 'Tess · Optagelse', go: () => this.go('record') },
-        { n: '4', label: 'Storm · Låseskærm med notifikation', go: () => this.go('lock') },
-        { n: '5', label: 'Storm · Profil og bedømmelse', go: () => this.go('rate') },
+        { n: '1', label: 'Velkomstskærm', go: () => this.go('splash') },
+        { n: '2', label: 'Storms profil · næste session', go: () => { this.setActive(false); this.go('home'); } },
+        { n: '3', label: 'Optagelse', go: () => this.go('record') },
+        { n: '4', label: 'Storms profil · aktiv session', go: () => { this.setActive(true); this.go('home'); } },
+        { n: '5', label: 'Låseskærm med besked', go: () => this.go('lock') },
+        { n: '6', label: 'Tess’ rating', go: () => this.go('rate') },
       ],
+      pickers: [
+        { label: 'Vælg billede af Storm', onPick: this.picker('storm') },
+        { label: 'Vælg billede af Tess', onPick: this.picker('tess') },
+        { label: 'Vælg baggrund til låseskærm', onPick: this.picker('wall') },
+      ],
+      elapsedInput: s.elapsedInput,
+      onElapsed: (e) => this.setState({ elapsedInput: e.target.value }),
+      setElapsed: () => {
+        const parts = s.elapsedInput.trim().split(/[:.,\s]+/).map(Number);
+        if (!parts.length || parts.some(isNaN)) return;
+        while (parts.length < 3) parts.unshift(0);
+        this.offset = parts[0] * 3600 + parts[1] * 60 + parts[2];
+        this.store('plusone-offset', String(this.offset));
+        this.setActive(true);
+        this.setState({ elapsedInput: '', menu: false, screen: 'app', tab: 'home' });
+      },
+      timerLabel: s.showTimer ? 'Skjul tid i aktiv session' : 'Vis tid i aktiv session',
+      toggleTimer: () => { this.store('plusone-timer', s.showTimer ? '0' : '1'); this.setState({ showTimer: !s.showTimer }); },
       msgs: (s.msgs || this.defaultMsgs).map((m, i, all) => {
         const po = m.name === 'PlusOne';
         return { ...m, initial: (m.name || '?').charAt(0).toUpperCase(),
-          avStyle: { width: 42, height: 42, flex: 'none', borderRadius: '50%', border: '1px solid ' + (po ? '#E8566A' : 'var(--color-divider)'), display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Cormorant Garamond',serif", fontSize: 20, color: po ? '#B4304A' : 'var(--color-text)' },
-          nameStyle: { fontSize: 15, fontWeight: m.unread ? 600 : 400 },
-          timeStyle: { fontSize: 12, color: m.unread ? '#B4304A' : '#6b6565', flex: 'none' },
-          textStyle: { fontSize: 14, color: m.unread ? 'var(--color-text)' : '#4a4545', marginTop: 3, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
-          toggleStyle: { width: 36, height: 36, flex: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, color: m.unread ? '#E8566A' : '#d6cfcf' },
+          rowStyle: { display: 'flex', gap: 12, alignItems: 'flex-start', padding: '14px 0', borderBottom: i < all.length - 1 ? '1px solid rgba(255,255,255,.3)' : 'none' },
+          avStyle: { width: 44, height: 44, flex: 'none', borderRadius: '50%', background: po ? '#fff' : 'rgba(255,255,255,.25)', border: '1px solid rgba(255,255,255,.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, fontWeight: 600, color: po ? '#FF5757' : '#fff' },
+          nameStyle: { fontSize: 15, fontWeight: m.unread ? 700 : 500 },
+          timeStyle: { fontSize: 12, color: m.unread ? '#AD1B45' : '#6b5357', flex: 'none' },
+          textStyle: { fontSize: 14, color: m.unread ? '#4F3A3E' : '#6b5357', marginTop: 3, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
+          toggleStyle: { width: 36, height: 36, flex: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, color: m.unread ? '#FF5757' : '#d6cfcf' },
           remove: () => this.saveMsgs(all.filter((_, j) => j !== i)),
           toggle: () => this.saveMsgs(all.map((x, j) => j === i ? { ...x, unread: !x.unread } : x)),
         };
@@ -637,40 +661,11 @@ class Component extends DCLogic {
         this.saveMsgs([{ name: s.newName.trim(), time: t, text: s.newText.trim(), unread: true }, ...(s.msgs || this.defaultMsgs)]);
         this.setState({ newName: '', newTime: '', newText: '' });
       },
-      elapsedInput: s.elapsedInput,
-      onElapsed: (e) => this.setState({ elapsedInput: e.target.value }),
-      setElapsed: () => {
-        const parts = s.elapsedInput.trim().split(/[:.,\s]+/).map(Number);
-        if (!parts.length || parts.some(isNaN)) return;
-        while (parts.length < 3) parts.unshift(0);
-        const sec = parts[0] * 3600 + parts[1] * 60 + parts[2];
-        this.sessionStart = Date.now() - sec * 1000;
-        try { localStorage.setItem('plusone-session-start', String(this.sessionStart)); } catch (e) {}
-        this.setState({ elapsedInput: '', now: Date.now(), menu: false, screen: 'app', tab: 'home' });
-      },
       micLabel: s.mic ? 'Mikrofon er klar' : 'Giv adgang til mikrofon',
       testMic: () => { this.ensureAC(); this.getMic(); },
-      onPhoto: (e) => {
-        const f = e.target.files && e.target.files[0]; if (!f) return;
-        const r = new FileReader();
-        r.onload = () => {
-          const img = new Image();
-          img.onload = () => {
-            const k = Math.min(1, 1000 / Math.max(img.width, img.height));
-            const cv = document.createElement('canvas'); cv.width = img.width * k; cv.height = img.height * k;
-            cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
-            const url = cv.toDataURL('image/jpeg', 0.86);
-            try { localStorage.setItem('plusone-photo', url); } catch (err) {}
-            this.setState({ photo: url, photoOk: true, menu: false });
-          };
-          img.src = r.result;
-        };
-        r.readAsDataURL(f);
-      },
     };
   }
 }
-
 </script>
 </body>
 </html>
